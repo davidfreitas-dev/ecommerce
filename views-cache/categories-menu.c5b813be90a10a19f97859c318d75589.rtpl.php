@@ -1,0 +1,1 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?><li class="nav-item"><a class="nav-link" href="/categories/2">Motherboard</a></li><li class="nav-item"><a class="nav-link" href="/categories/5">Peripherals</a></li><li class="nav-item"><a class="nav-link" href="/categories/4">Processor</a></li><li class="nav-item"><a class="nav-link" href="/categories/3">SSD</a></li>
