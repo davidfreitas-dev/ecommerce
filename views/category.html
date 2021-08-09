@@ -64,6 +64,18 @@
             </div>
           </div>
         </div>
+
+        <div class="row flex-row-reverse mt-5">
+          <div class="col-lg-12">
+            <nav aria-label="Page navigation">
+              <ul class="pagination justify-content-center">
+                {loop="$pages"}
+                <li class="page-item"><a class="page-link" href="{$value.link}">{$value.page}</a></li>
+                {/loop}
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </section>
     <!--================End Category Product Area =================-->

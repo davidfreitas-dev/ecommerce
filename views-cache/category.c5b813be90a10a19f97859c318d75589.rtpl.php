@@ -64,6 +64,18 @@
             </div>
           </div>
         </div>
+
+        <div class="row flex-row-reverse mt-5">
+          <div class="col-lg-12">
+            <nav aria-label="Page navigation">
+              <ul class="pagination justify-content-center">
+                <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+                <li class="page-item"><a class="page-link" href="<?php echo htmlspecialchars( $value1["link"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["page"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                <?php } ?>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </section>
     <!--================End Category Product Area =================-->
