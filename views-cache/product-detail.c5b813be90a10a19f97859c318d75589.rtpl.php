@@ -30,7 +30,8 @@
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <!-- <ol class="carousel-indicators">
+                <!-- Para produtos com mais de uma foto
+                <ol class="carousel-indicators">
                   <li
                     data-target="#carouselExampleIndicators"
                     data-slide-to="0"
@@ -68,7 +69,8 @@
                       alt="First slide"
                     />
                   </div>
-                  <!-- <div class="carousel-item">
+                  <!-- Para produtos com mais de uma foto
+                  <div class="carousel-item">
                     <img
                       class="d-block w-100"
                       src="img/product/amd.png"
@@ -92,10 +94,16 @@
               <h2>R$<?php echo formatPrice($product["vlprice"]); ?></h2>
               <ul class="list">
                 <li>
-                    <span>Category:</span><?php $counter1=-1;  if( isset($categories) && ( is_array($categories) || $categories instanceof Traversable ) && sizeof($categories) ) foreach( $categories as $key1 => $value1 ){ $counter1++; ?> <a class="active" href="/categories/<?php echo htmlspecialchars( $value1["idcategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a> <?php } ?>
+                    <span>Category:&ensp;</span>
+                    <?php $counter1=-1;  if( isset($categories) && ( is_array($categories) || $categories instanceof Traversable ) && sizeof($categories) ) foreach( $categories as $key1 => $value1 ){ $counter1++; ?>
+                    <a class="active" href="/categories/<?php echo htmlspecialchars( $value1["idcategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                      <?php echo htmlspecialchars( $value1["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>&ensp;
+                    </a>
+                    <?php } ?>
                 </li>
                 <li>
-                  <a href="#"> <span>Availibility</span> : In Stock</a>
+                  <span>Availibility:&ensp;</span>
+                  <a href="#">In Stock</a>
                 </li>
               </ul>
               <p>

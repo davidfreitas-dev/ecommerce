@@ -8,9 +8,9 @@
               <p>Very us move be blessed multiply night</p>
             </div>
             <div class="page_link">
-              <a href="index.html">Home</a>
-              <a href="category.html">Shop</a>
-              <a href="category.html"><?php echo htmlspecialchars( $category["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
+              <a href="#">Home</a>
+              <a href="#">Shop</a>
+              <a href="#"><?php echo htmlspecialchars( $category["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
             </div>
           </div>
         </div>
@@ -22,42 +22,26 @@
     <section class="cat_product_area section_gap">
       <div class="container">
         <div class="row flex-row-reverse">
-          <div class="col-lg-12">
-            <div class="product_top_bar">
-              <div class="left_dorp">
-                <select class="sorting">
-                  <option value="1">Default sorting</option>
-                  <option value="2">Default sorting 01</option>
-                  <option value="4">Default sorting 02</option>
-                </select>
-                <select class="show">
-                  <option value="1">Show 12</option>
-                  <option value="2">Show 14</option>
-                  <option value="4">Show 16</option>
-                </select>
-              </div>
-            </div>
-            
+          <div class="col-lg-12">            
             <div class="latest_product_inner">
               <div class="row">
                 <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
-                <div class="col-lg-3 col-md-6 col-6">
-                  <a href="#">
-                    <div class="single-product">
-                      <div class="product-img">
+                <div class="col-lg-3 col-md-6 col-6">          
+                  <div class="single-product">
+                    <div class="product-img">
+                      <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         <img class="img-fluid w-100" src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="" />
-                      </div>
-                      <div class="product-btm">
-                        <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="d-block">
-                          <h4><?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h4>
-                        </a>
-                        <div class="mt-3">
-                          <span class="mr-4">$<?php echo formatPrice($value1["vlprice"]); ?></span>
-                          <del>$35.00</del>
-                        </div>
+                      </a>
+                    </div>
+                    <div class="product-btm">
+                      <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="d-block">
+                        <h4><?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h4>
+                      </a>
+                      <div class="mt-3">
+                        <span class="mr-4">R$<?php echo formatPrice($value1["vlprice"]); ?></span>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </div>
                 <?php } ?>
               </div>

@@ -30,7 +30,8 @@
                 class="carousel slide"
                 data-ride="carousel"
               >
-                <!-- <ol class="carousel-indicators">
+                <!-- Para produtos com mais de uma foto
+                <ol class="carousel-indicators">
                   <li
                     data-target="#carouselExampleIndicators"
                     data-slide-to="0"
@@ -68,7 +69,8 @@
                       alt="First slide"
                     />
                   </div>
-                  <!-- <div class="carousel-item">
+                  <!-- Para produtos com mais de uma foto
+                  <div class="carousel-item">
                     <img
                       class="d-block w-100"
                       src="img/product/amd.png"
@@ -92,10 +94,16 @@
               <h2>R${function="formatPrice($product.vlprice)"}</h2>
               <ul class="list">
                 <li>
-                    <span>Category:</span>{loop="$categories"} <a class="active" href="/categories/{$value.idcategory}">{$value.descategory}</a> {/loop}
+                    <span>Category:&ensp;</span>
+                    {loop="$categories"}
+                    <a class="active" href="/categories/{$value.idcategory}">
+                      {$value.descategory}&ensp;
+                    </a>
+                    {/loop}
                 </li>
                 <li>
-                  <a href="#"> <span>Availibility</span> : In Stock</a>
+                  <span>Availibility:&ensp;</span>
+                  <a href="#">In Stock</a>
                 </li>
               </ul>
               <p>
