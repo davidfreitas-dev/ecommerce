@@ -1,4 +1,4 @@
-    <!--================Home Banner Area =================-->
+<?php if(!class_exists('Rain\Tpl')){exit;}?>    <!--================Home Banner Area =================-->
     <section class="banner_area">
       <div class="banner_inner d-flex align-items-center">
         <div class="container">
