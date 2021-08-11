@@ -33,7 +33,6 @@
               </thead>
               <tbody>
                 <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
-
                 <tr>
                   <td>
                     <div class="media">
@@ -90,7 +89,6 @@
                   </td>
                 </tr>
                 <?php } ?>
-
                 <tr>
                   <td></td>
                   <td></td>
