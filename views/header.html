@@ -92,10 +92,30 @@
 
               <div class="col-lg-5 pr-0">
                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
-                  <li class="nav-item">
-                    <a href="#" class="icons" title="My Account">
+                  <li class="nav-item submenu dropdown">
+                    <a href="/profile" class="icons">
                       <i class="ti-user" aria-hidden="true"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                      {if="checkLogin(false)"}
+                      <li class="nav-item">
+                        <a class="nav-link" href="/profile">
+                          <i class="ti-settings" aria-hidden="true"></i>&ensp;Account
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/logout">
+                          <i class="ti-power-off" aria-hidden="true"></i>&ensp;Logout
+                        </a>
+                      </li>
+                      {else}
+                      <li class="nav-item">
+                        <a class="nav-link" href="/login">
+                          <i class="ti-shift-right" aria-hidden="true"></i>&ensp;Login
+                        </a>
+                      </li>
+                      {/if}
+                    </ul>
                   </li>
 
                   <li class="nav-item">

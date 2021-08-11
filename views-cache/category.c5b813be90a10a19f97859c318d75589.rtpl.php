@@ -8,7 +8,7 @@
               <p>Very us move be blessed multiply night</p>
             </div>
             <div class="page_link">
-              <a href="#">Home</a>
+              <a href="/">Home</a>
               <a href="#">Shop</a>
               <a href="#"><?php echo htmlspecialchars( $category["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a>
             </div>
