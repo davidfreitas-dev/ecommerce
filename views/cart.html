@@ -94,14 +94,12 @@
                     <td>
                       <div class="row">
                         <div class="col-md-6">
-                          <form action="/cart/freight" method="POST">
-                            <div class="input-group">
-                              <input type="text" class="form-control" value="{$cart.deszipcode}" placeholder="Digite o CEP" name="zipcode">
-                              <div class="input-group-append">
-                                <button class="input-group-text" type="submit">Calcular</button>
-                              </div>
+                          <div class="input-group">
+                            <input type="text" class="form-control" value="{$cart.deszipcode}" placeholder="Digite o CEP" name="zipcode">
+                            <div class="input-group-append">
+                              <input class="input-group-text" type="submit" formmethod="POST" formaction="/cart/freight" value="Calcular"/>
                             </div>
-                          </form>
+                          </div>
                         </div>                      
                       </div>
                     </td>

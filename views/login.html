@@ -30,10 +30,10 @@
                                 <h2 class="mb-3">Login</h2>
                                 <form class="row tracking_form" action="/login" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group">
-                                        <input type="text" class="form-control" id="login" name="login" placeholder="Username">
+                                        <input type="email" class="single-input" id="login" name="login" placeholder="Email">
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                        <input type="password" class="single-input" id="password" name="password" placeholder="Password">
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <button type="submit" value="submit" class="btn submit_btn">Enter</button>
@@ -53,23 +53,30 @@
                     <div class="col-md-6">
                         <div class="col-md-10">
                             <div class="px-3">
-                                <h2 class="mb-3">Cadastre-se</h2>
-                                <form class="row tracking_form" action="#" method="post" novalidate="novalidate">
+                                <h2 class="mb-3">Sign Up</h2>
+                                <form class="row tracking_form" action="/register" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group">
-                                        <input type="text" class="form-control" id="order" name="order" placeholder="Order ID">
+                                        <input type="text" class="single-input" id="name" name="name" placeholder="Name">
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Billing Email Address">
+                                        <input type="email" class="single-input" id="email" name="email" placeholder="Email">
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <input type="text" class="form-control" id="order" name="order" placeholder="Order ID">
+                                        <input type="text" class="single-input" id="phone" name="phone" placeholder="Phone">
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Billing Email Address">
+                                        <input type="password" class="single-input" id="password" name="password" placeholder="Password">
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <button type="submit" value="submit" class="btn submit_btn">Track Order</button>
+                                        <button type="submit" value="submit" class="btn submit_btn">Register</button>
                                     </div>
+                                    {if="$errorRegister != ''"}
+                                    <div class="col-md-12 form-group">
+                                        <div class="alert alert-danger">
+                                            {$errorRegister}
+                                        </div>
+                                    </div>
+                                    {/if}
                                 </form>
                             </div>
                         </div>

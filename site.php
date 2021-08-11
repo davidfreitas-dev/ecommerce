@@ -365,7 +365,7 @@ $app->post("/register", function(){
 
 	if (!isset($_POST['name']) || $_POST['name'] == '') {
 
-		User::setErrorRegister("Preencha o seu nome.");
+		User::setErrorRegister("Preencha o campo nome.");
 		header("Location: /login");
 		exit;
 
@@ -373,7 +373,7 @@ $app->post("/register", function(){
 
 	if (!isset($_POST['email']) || $_POST['email'] == '') {
 
-		User::setErrorRegister("Preencha o seu e-mail.");
+		User::setErrorRegister("Preencha o campo e-mail.");
 		header("Location: /login");
 		exit;
 
@@ -381,7 +381,7 @@ $app->post("/register", function(){
 
 	if (!isset($_POST['password']) || $_POST['password'] == '') {
 
-		User::setErrorRegister("Preencha a senha.");
+		User::setErrorRegister("Preencha o campo senha.");
 		header("Location: /login");
 		exit;
 
@@ -389,7 +389,7 @@ $app->post("/register", function(){
 
 	if (User::checkLoginExist($_POST['email']) === true) {
 
-		User::setErrorRegister("Este endereço de e-mail já está sendo usado por outro usuário.");
+		User::setErrorRegister("Endereço de e-mail já utilizado.");
 		header("Location: /login");
 		exit;
 
