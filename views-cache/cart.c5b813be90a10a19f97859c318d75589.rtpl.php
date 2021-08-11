@@ -93,9 +93,9 @@
                   <td>
                     <div class="row">
                       <div class="col-md-6">
-                        <form action="" method="POST">
+                        <form action="/cart/freight" method="POST">
                           <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Digite o CEP">
+                            <input type="text" class="form-control" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" placeholder="Digite o CEP" name="zipcode">
                             <div class="input-group-append">
                               <button class="input-group-text" type="submit">Calcular</button>
                             </div>
@@ -108,16 +108,31 @@
                   <td>
                     <h5 class="mb-3">Subtotal</h5>
                     <h5 class="mb-3">Frete</h5>
+                    <h5 class="mb-3">Prazo</h5>
                     <h5 class="mb-3">Total</h5>
                   </td>
                   <td>
-                    <h5 class="mb-3">$2160.00</h5>
-                    <h5 class="mb-3">$2160.00</h5>
-                    <h5 class="mb-3">$2160.00</h5>
+                    <h5 class="mb-3">R$<?php echo formatPrice($cart["vlsubtotal"]); ?></h5>
+                    <h5 class="mb-3">R$<?php echo formatPrice($cart["vlfreight"]); ?></h5>
+                    <h5 class="mb-3">
+                      <?php if( $cart["nrdays"] > 0 ){ ?><?php echo htmlspecialchars( $cart["nrdays"], ENT_COMPAT, 'UTF-8', FALSE ); ?> dia(s)<?php } ?>
+                      <?php if( $cart["nrdays"] < 1 ){ ?>0 dia(s)<?php } ?>
+                    </h5>
+                    <h5 class="mb-3">R$<?php echo formatPrice($cart["vltotal"]); ?></h5>
                   </td>
                 </tr>                
                 <tr class="out_button_area">
-                  <td></td>
+                  <td>
+                    <?php if( $error != '' ){ ?>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="alert alert-danger" role="alert">
+                          <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        </div>
+                      </div>
+                    </div>
+                    <?php } ?>
+                  </td>
                   <td></td>
                   <td></td>
                   <td>
