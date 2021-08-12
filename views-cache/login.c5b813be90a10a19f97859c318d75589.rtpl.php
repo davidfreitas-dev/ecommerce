@@ -7,11 +7,10 @@
           >
             <div class="mb-3 mb-md-0">
               <h2>Login</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div class="page_link">
-              <a href="/">Home</a>
-              <a href="/login">Login</a>
+              <div class="page_link">
+                <a href="/">Home</a>
+                <a href="/login">Login</a>
+              </div>
             </div>
           </div>
         </div>
@@ -20,7 +19,7 @@
     <!--================End Home Banner Area =================-->
 
     <!--================Tracking Box Area =================-->
-    <section class="tracking_box_area section_gap mt-5 mb-5">
+    <section class="tracking_box_area section_gap mb-5">
         <div class="container">
             <div class="tracking_box_inner">
                 <div class="row">
@@ -28,6 +27,7 @@
                         <div class="col-md-8">
                             <div class="px-3 mb-5">
                                 <h2 class="mb-3">Login</h2>
+                                <p>Have you an account? Access here!</p>
                                 <form class="row tracking_form" action="/login" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group">
                                         <input type="email" class="single-input" id="login" name="login" placeholder="Email">
@@ -37,6 +37,7 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <button type="submit" value="submit" class="btn submit_btn">Enter</button>
+                                        <a href="">&ensp;Forgot my password</a>
                                     </div>
                                     <?php if( $error != '' ){ ?>
                                     <div class="col-md-12 form-group">
@@ -54,6 +55,7 @@
                         <div class="col-md-10">
                             <div class="px-3">
                                 <h2 class="mb-3">Sign Up</h2>
+                                <p>Don't have an account? Sign up here!</p>
                                 <form class="row tracking_form" action="/register" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group">
                                         <input type="text" class="single-input" id="name" name="name" placeholder="Name">

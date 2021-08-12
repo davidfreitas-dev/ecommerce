@@ -7,11 +7,10 @@
           >
             <div class="mb-3 mb-md-0">
               <h2>Product Details</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div class="page_link">
-              <a href="/">Home</a>
-              <a href="#">Product Details</a>
+              <div class="page_link">
+                <a href="/">Home</a>
+                <a href="">Product Details</a>
+              </div>
             </div>
           </div>
         </div>

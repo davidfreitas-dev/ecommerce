@@ -7,11 +7,10 @@
           >
             <div class="mb-3 mb-md-0">
               <h2>Product Checkout</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div class="page_link">
-              <a href="/">Home</a>
-              <a href="/checkout">Product Checkout</a>
+              <div class="page_link">
+                <a href="/">Home</a>
+                <a href="">Product Checkout</a>
+              </div>
             </div>
           </div>
         </div>
@@ -22,6 +21,7 @@
     <!--================Checkout Area =================-->
     <section class="checkout_area section_gap">
       <div class="container">
+        <!-- Area para aplicacao de cupons 
         <div class="cupon_area">
           <div class="check_title">
             <h2>
@@ -31,105 +31,42 @@
           </div>
           <input type="text" placeholder="Enter coupon code" />
           <a class="tp_btn" href="#">Apply Coupon</a>
-        </div>
+        </div> -->
         <div class="billing_details">
           <div class="row">
             <div class="col-lg-7">
               <h3>Billing Details</h3>
-              <form
-                class="row contact_form"
-                action="#"
-                method="post"
-                novalidate="novalidate"
-              >
+              <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                 <div class="col-md-6 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="first"
-                    name="name"
-                  />
-                  <span
-                    class="placeholder"
-                    data-placeholder="First name"
-                  ></span>
+                  <input type="text" class="form-control" id="name" name="name"/>
+                  <span class="placeholder" data-placeholder="Name"></span>
                 </div>
                 <div class="col-md-6 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="last"
-                    name="name"
-                  />
-                  <span class="placeholder" data-placeholder="Last name"></span>
+                  <input type="text" class="form-control" id="cpf" name="cpf"/>
+                  <span class="placeholder" data-placeholder="CPF"></span>
                 </div>
                 <div class="col-md-6 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="number"
-                    name="number"
-                  />
-                  <span
-                    class="placeholder"
-                    data-placeholder="Phone number"
-                  ></span>
+                  <input type="text" class="form-control" id="phone" name="phone"/>
+                  <span class="placeholder" data-placeholder="Phone number"></span>
                 </div>
                 <div class="col-md-6 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="compemailany"
-                  />
-                  <span
-                    class="placeholder"
-                    data-placeholder="Email Address"
-                  ></span>
+                  <input type="email" class="form-control" id="email" name="email"/>
+                  <span class="placeholder" data-placeholder="Email"></span>
                 </div>
                 <div class="col-md-9 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="number"
-                    name="number"
-                  />
-                  <span
-                    class="placeholder"
-                    data-placeholder="Address"
-                  ></span>
+                  <input type="text" class="form-control" id="address" name="address"/>
+                  <span class="placeholder" data-placeholder="Address"></span>
                 </div>
                 <div class="col-md-3 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="compemailany"
-                  />
-                  <span
-                    class="placeholder"
-                    data-placeholder="Number"
-                  ></span>
+                  <input type="text" class="form-control" id="number" name="number"/>
+                  <span class="placeholder" data-placeholder="Number"></span>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="add2"
-                    name="add2"
-                  />
-                  <span
-                    class="placeholder"
-                    data-placeholder="Complement"
-                  ></span>
+                  <input type="text" class="form-control" id="complement" name="complement"/>
+                  <span class="placeholder" data-placeholder="Complement"></span>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="city"
-                    name="city"
-                  />
+                  <input type="text" class="form-control" id="nbhood" name="nbhood"/>
                   <span class="placeholder" data-placeholder="Neighborhood"></span>
                 </div>
                 <div class="col-md-12 form-group p_star">
@@ -139,23 +76,12 @@
                     <option value="4">London</option>
                   </select>
                 </div>
-                <div class="col-md-12 form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="zip"
-                    name="zip"
-                    placeholder="Postcode/ZIP"
-                  />
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="zipcode" name="zipcode"/>
+                  <span class="placeholder" data-placeholder="Postcode/ZIP"></span>
                 </div>
-                <div class="col-md-12 form-group">
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    id="message"
-                    rows="1"
-                    placeholder="Order Notes"
-                  ></textarea>
+                <div class="col-md-12 form-group p_star">
+                  <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
                 </div>
               </form>
             </div>

@@ -5,11 +5,10 @@
           <div class="banner_content d-md-flex justify-content-between align-items-center">
             <div class="mb-3 mb-md-0">
               <h2>Cart</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div class="page_link">
-              <a href="/">Home</a>
-              <a href="/cart">Cart</a>
+              <div class="page_link">
+                <a href="/">Home</a>
+                <a href="/cart">Cart</a>
+              </div>
             </div>
           </div>
         </div>

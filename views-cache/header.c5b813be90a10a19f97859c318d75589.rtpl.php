@@ -111,7 +111,7 @@
                       <?php }else{ ?>
                       <li class="nav-item">
                         <a class="nav-link" href="/login">
-                          <i class="ti-shift-right" aria-hidden="true"></i>&ensp;Login
+                          <i class="ti-user" aria-hidden="true"></i>&ensp;Login
                         </a>
                       </li>
                       <?php } ?>
