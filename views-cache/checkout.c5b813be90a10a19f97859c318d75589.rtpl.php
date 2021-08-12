@@ -33,140 +33,111 @@
           <a class="tp_btn" href="#">Apply Coupon</a>
         </div> -->
         <div class="billing_details">
-          <div class="row">
-            <div class="col-lg-7">
-              <h3>Billing Details</h3>
-              <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="name" name="name"/>
-                  <span class="placeholder" data-placeholder="Name"></span>
+          <form class="row contact_form" action="/checkout" method="post">
+            <div class="row">
+              <div class="col-lg-7 mb-5">
+                <?php if( $error != '' ){ ?>
+                <div class="alert alert-danger">
+                  <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
                 </div>
-                <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="cpf" name="cpf"/>
-                  <span class="placeholder" data-placeholder="CPF"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="phone" name="phone"/>
-                  <span class="placeholder" data-placeholder="Phone number"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                  <input type="email" class="form-control" id="email" name="email"/>
-                  <span class="placeholder" data-placeholder="Email"></span>
+                <?php } ?>
+                <h3>Billing Details</h3>
+                <button type="submit" class="main_btn ml-3 mb-3" formaction="/checkout" formmethod="get">Atualizar CEP</button>
+                <div class="col-md-12 form-group p_star">
+                  <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zipcode" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                 </div>
                 <div class="col-md-9 form-group p_star">
-                  <input type="text" class="form-control" id="address" name="address"/>
-                  <span class="placeholder" data-placeholder="Address"></span>
+                  <input type="text" class="form-control" id="address" name="desaddress" placeholder="Address" value="<?php echo htmlspecialchars( $address["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                 </div>
                 <div class="col-md-3 form-group p_star">
-                  <input type="text" class="form-control" id="number" name="number"/>
-                  <span class="placeholder" data-placeholder="Number"></span>
+                  <input type="text" class="form-control" id="number" name="desnumber" placeholder="Number"/>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="complement" name="complement"/>
-                  <span class="placeholder" data-placeholder="Complement"></span>
+                  <input type="text" class="form-control" id="complement" name="descomplement" placeholder="Complement"/>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="nbhood" name="nbhood"/>
-                  <span class="placeholder" data-placeholder="Neighborhood"></span>
+                  <input type="text" class="form-control" id="district" name="desdistrict" placeholder="Neighborhood" value="<?php echo htmlspecialchars( $address["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <select class="country_select">
-                    <option value="1">Town/City</option>
-                    <option value="2">New York</option>
-                    <option value="4">London</option>
-                  </select>
+                  <input type="text" class="form-control" id="city" name="descity" placeholder="City" value="<?php echo htmlspecialchars( $address["descity"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <input type="text" class="form-control" id="zipcode" name="zipcode"/>
-                  <span class="placeholder" data-placeholder="Postcode/ZIP"></span>
+                  <input type="text" class="form-control" id="state" name="desstate" placeholder="State" value="<?php echo htmlspecialchars( $address["desstate"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                 </div>
                 <div class="col-md-12 form-group p_star">
-                  <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
+                  <input type="text" class="form-control" id="country" name="descountry" placeholder="Country" value="<?php echo htmlspecialchars( $address["descountry"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
                 </div>
-              </form>
-            </div>
-            <div class="col-lg-5">
-              <div class="order_box">
-                <h2>Your Order</h2>
-                <ul class="list">
-                  <li>
-                    <a href="#"
-                      >Product
-                      <span>Total</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >Processor
-                      <span class="middle">x 02</span>
-                      <span class="last">$720.00</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >Motherboard
-                      <span class="middle">x 02</span>
-                      <span class="last">$720.00</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >Memory
-                      <span class="middle">x 02</span>
-                      <span class="last">$720.00</span>
-                    </a>
-                  </li>
-                </ul>
-                <ul class="list list_2">
-                  <li>
-                    <a href="#"
-                      >Subtotal
-                      <span>$2160.00</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >Shipping
-                      <span>$50.00</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      >Total
-                      <span>$2210.00</span>
-                    </a>
-                  </li>
-                </ul>
-                <div class="payment_item">
-                  <div class="radion_btn">
-                    <input type="radio" id="f-option5" name="selector" />
-                    <label for="f-option5">Pix</label>
-                    <div class="check"></div>
+              </div>
+              <div class="col-lg-5">
+                <div class="order_box">
+                  <h2>Your Order</h2>
+                  <ul class="list">
+                    <li>
+                      <a href="#">
+                        Product
+                        <span>Total</span>
+                      </a>
+                    </li>
+                    <li>
+                      <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
+                      <a href="#">
+                        <?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                        <span class="middle">x <?php echo htmlspecialchars( $value1["nrqtd"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+                        <span class="last">R$<?php echo formatPrice($value1["vltotal"]); ?></span>
+                      </a>
+                      <?php } ?>
+                    </li>
+                  </ul>
+                  <ul class="list list_2">
+                    <li>
+                      <a href="#">Subtotal
+                        <span>R$<?php echo formatPrice($cart["vlsubtotal"]); ?></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Shipping
+                        <span>R$<?php echo formatPrice($cart["vlfreight"]); ?></span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Total
+                        <span>R$<?php echo formatPrice($cart["vltotal"]); ?></span>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="payment_item">
+                    <div class="radion_btn">
+                      <input type="radio" id="f-option5" name="selector" />
+                      <label for="f-option5">Pix</label>
+                      <div class="check"></div>
+                    </div>
+                    <p>
+                      You must send a check to store email
+                    </p>
                   </div>
-                  <p>
-                    You must send a check to store email
-                  </p>
-                </div>
-                <div class="payment_item active">
-                  <div class="radion_btn">
-                    <input type="radio" id="f-option6" name="selector" />
-                    <label for="f-option6">Credit Card </label>
-                    <div class="check"></div>
+                  <div class="payment_item active">
+                    <div class="radion_btn">
+                      <input type="radio" id="f-option6" name="selector" />
+                      <label for="f-option6">Credit Card </label>
+                      <div class="check"></div>
+                    </div>
+                    <p>
+                      Please send a check to Store Name, Store Street, Store Town,
+                      Store State / County, Store Postcode.
+                    </p>
                   </div>
-                  <p>
-                    Please send a check to Store Name, Store Street, Store Town,
-                    Store State / County, Store Postcode.
-                  </p>
+                  <div class="creat_account">
+                    <input type="checkbox" id="f-option4" name="selector" />
+                    <label for="f-option4">I’ve read and accept the </label>
+                    <a href="#">terms & conditions*</a>
+                  </div>
+                  <button class="main_btn" type="submit">Proceed to Payment</button>
                 </div>
-                <div class="creat_account">
-                  <input type="checkbox" id="f-option4" name="selector" />
-                  <label for="f-option4">I’ve read and accept the </label>
-                  <a href="#">terms & conditions*</a>
-                </div>
-                <a class="main_btn" href="#">Proceed to Paypal</a>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>
