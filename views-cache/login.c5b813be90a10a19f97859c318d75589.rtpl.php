@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <button type="submit" value="submit" class="btn submit_btn">Enter</button>
-                                        <a href="">&ensp;Forgot my password</a>
+                                        <a href="/forgot">&ensp;Forgot my password</a>
                                     </div>
                                     <?php if( $error != '' ){ ?>
                                     <div class="col-md-12 form-group">
