@@ -166,8 +166,17 @@ class User extends Model {
 
 	}
 
-	public function update()
+	public function update($passwordHash = true)
 	{
+		if ($passwordHash) {
+
+			$password = User::getPasswordHash($this->getdespassword());
+
+		} else {
+
+			$password = $this->getdespassword();
+
+		}
 
 		$sql = new Sql();
 
@@ -175,7 +184,7 @@ class User extends Model {
 			":iduser"=>$this->getiduser(),
 			":desperson"=>utf8_decode($this->getdesperson()),
 			":deslogin"=>$this->getdeslogin(),
-			":despassword"=>User::getPasswordHash($this->getdespassword()),
+			":despassword"=>$password,
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
 			":inadmin"=>$this->getinadmin()
@@ -401,7 +410,7 @@ class User extends Model {
 
 	}
 
-	public static function checkLoginExist($login)
+	public static function checkLoginExists($login)
 	{
 
 		$sql = new Sql();

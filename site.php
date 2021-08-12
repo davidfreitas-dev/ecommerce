@@ -387,7 +387,7 @@ $app->post("/register", function(){
 
 	}
 
-	if (User::checkLoginExist($_POST['email']) === true) {
+	if (User::checkLoginExists($_POST['email']) === true) {
 
 		User::setErrorRegister("Endereço de e-mail já utilizado.");
 		header("Location: /login");
@@ -512,7 +512,7 @@ $app->post("/profile", function(){
 
 		if (User::checkLoginExists($_POST['desemail']) === true) {
 
-			User::setError("Este endereço de e-mail já está cadastrado.");
+			User::setError("Endereço de e-mail já está cadastrado.");
 			header('Location: /profile');
 			exit;
 
@@ -526,7 +526,9 @@ $app->post("/profile", function(){
 
 	$user->setData($_POST);
 
-	$user->save();
+	$user->update(false);
+
+	$_SESSION[User::SESSION] = $user->getValues();
 
 	User::setSuccess("Dados alterados com sucesso!");
 
