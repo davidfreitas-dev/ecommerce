@@ -119,7 +119,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="#" class="icons" title="My Orders">
+                    <a href="/profile/orders" class="icons" title="My Orders">
                       <i class="ti-package"></i>
                     </a>
                   </li>
@@ -127,6 +127,7 @@
                   <li class="nav-item">
                     <a href="/cart" class="icons" title="Shopping Bag">
                       <i class="ti-bag" aria-hidden="true"></i>
+                      <span class="badge badge-primary"><?php echo getCartNrQtd(); ?></span>
                     </a>
                   </li>                  
                 </ul>

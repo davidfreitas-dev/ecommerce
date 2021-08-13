@@ -44,7 +44,7 @@
               <h3>Billing Details</h3>
 
             <form class="row contact_form" action="/checkout" method="post">
-              <button type="submit" class="main_btn ml-3 mb-3" formaction="/checkout" formmethod="get">Atualizar CEP</button>
+              <button type="submit" class="main_btn ml-3 mb-3" formaction="/checkout" formmethod="get">Buscar CEP</button>
               
               <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zipcode" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>

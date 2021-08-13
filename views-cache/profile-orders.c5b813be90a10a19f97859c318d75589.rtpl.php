@@ -6,10 +6,10 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
             >
             <div class="mb-3 mb-md-0">
-                <h2>Profile</h2>
+                <h2>Orders</h2>
                 <div class="page_link">
                 <a href="/">Home</a>
-                <a href="/profile">Orders</a>
+                <a href="/profile/orders">Orders</a>
                 </div>
             </div>
             </div>
@@ -30,7 +30,7 @@
                 <!-- /.col-lg-3 -->
 
                 <div class="col-lg-9">
-                    <h3 class="mb-30 title_color">Orders</h3>
+                    <h3 class="mb-2 ml-2">Orders</h3>
                     <div class="progress-table-wrap">
                         <div class="progress-table">
                             <div class="table-head">

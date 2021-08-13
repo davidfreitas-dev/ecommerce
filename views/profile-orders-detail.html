@@ -1,0 +1,83 @@
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+            >
+            <div class="mb-3 mb-md-0">
+                <h2>Order Details</h2>
+                <div class="page_link">
+                <a href="/">Home</a>
+                <a href="/profile/orders">Order Details</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+        
+    <!--================Tracking Box Area =================-->
+    <section class="tracking_box_area section_gap">
+        <div class="container">
+            <div class="tracking_box_inner mt-3 mb-3">
+                <div class="row">
+
+                <div class="col-lg-3">
+                    {include="profile-menu"}
+                </div>
+                <!-- /.col-lg-3 -->
+
+                <div class="col-lg-9">
+                    <h3 class="mb-5 ml-2">Order Details</h3>
+                    <div class="order-details">
+                        <div class="order-address px-3">
+                            <h5>Shipping Address</h5>
+                            <div class="details p-3">
+                                <p>{$order.desaddress}, {$order.desnumber} - {$order.descomplement}</p>
+                                <p>{$order.desdistrict} - {$order.desstate}</p>
+                                <p>CEP: {$order.deszipcode}</p>
+                            </div>
+                        </div>
+
+                        <div class="order-products px-3">
+                            <h5>Order Itens</h5>
+                            <div class="details p-3">
+                                <table class="table table-borderless text-dark">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Code&nbsp;#</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        </tr>
+                                    </thead>
+                                    {loop="$products"}
+                                    <tbody>
+                                        <tr>
+                                        <th scope="row">{$value.idproduct}</th>
+                                        <td>{$value.desproduct}</td>
+                                        <td>{$value.nrqtd}</td>
+                                        <td>R${function="formatPrice($value.vltotal)"}</td>
+                                        </tr>
+                                    </tbody>
+                                    {/loop}
+                                </table>                             
+                            </div>
+                        </div>
+
+                        <div class="order-price px-3">
+                            <h5>Payment Values</h5>
+                            <div class="details p-3">
+                                <p>Subtotal: R${function="formatPrice($cart.vlsubtotal)"}</p>
+                                <p>Freight: R${function="formatPrice($cart.vlfreight)"}</p>
+                                <p>Total: R${function="formatPrice($cart.vltotal)"}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Tracking Box Area =================-->
