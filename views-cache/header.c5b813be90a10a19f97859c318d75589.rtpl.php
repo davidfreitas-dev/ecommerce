@@ -125,8 +125,8 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="/cart" class="icons" title="Shopping Cart">
-                      <i class="ti-shopping-cart" aria-hidden="true"></i>
+                    <a href="/cart" class="icons" title="Shopping Bag">
+                      <i class="ti-bag" aria-hidden="true"></i>
                     </a>
                   </li>                  
                 </ul>

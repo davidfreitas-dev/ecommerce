@@ -24,12 +24,12 @@
             <div class="tracking_box_inner mt-3 mb-3">
                 <div class="row">
 
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-4">
                     <?php require $this->checkTemplate("profile-menu");?>
                 </div>
                 <!-- /.col-lg-3 -->
 
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-8">
                     <?php if( $profileMsg != '' ){ ?>
                     <div class="alert alert-success col-md-9">
                         <?php echo htmlspecialchars( $profileMsg, ENT_COMPAT, 'UTF-8', FALSE ); ?>
@@ -40,7 +40,7 @@
                         <?php echo htmlspecialchars( $profileError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </div>
                     <?php } ?>
-                    <h2>My Info</h2>
+                    <h2>Customer Info</h2>
                     <form class="row tracking_form" action="/profile" method="post">
                         <div class="col-md-12 form-group">
                             <input type="text" class="single-input" id="desperson" name="desperson" value="<?php echo htmlspecialchars( $user["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
