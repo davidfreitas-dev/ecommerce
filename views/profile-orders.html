@@ -1,0 +1,59 @@
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+            >
+            <div class="mb-3 mb-md-0">
+                <h2>Profile</h2>
+                <div class="page_link">
+                <a href="/">Home</a>
+                <a href="/profile">Orders</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+        
+    <!--================Tracking Box Area =================-->
+    <section class="tracking_box_area section_gap">
+        <div class="container">
+            <div class="tracking_box_inner mt-3 mb-3">
+                <div class="row">
+
+                <div class="col-lg-3">
+                    {include="profile-menu"}
+                </div>
+                <!-- /.col-lg-3 -->
+
+                <div class="col-lg-9">
+                    <h3 class="mb-30 title_color">Orders</h3>
+                    <div class="progress-table-wrap">
+                        <div class="progress-table">
+                            <div class="table-head">
+                                <div class="serial">#</div>
+                                <div class="country">Date</div>
+                                <div class="visit">Total</div>
+                                <div class="percentage">Status</div>
+                                <div class="visit">Ações</div>
+                            </div>
+                            {loop="$orders"}
+                            <div class="table-row">
+                                <div class="serial">{$value.idorder}</div>
+                                <div class="country">{$value.dtregister}</div>
+                                <div class="visit">{function="formatPrice($value.vltotal)"}</div>
+                                <div class="percentage">{$value.desstatus}</div>
+                                <div class="visit"><a href="/profile/orders/{$value.idorder}" class="btn btn-primary btn-sm">Detalhes</a></div>
+                            </div>
+                            {/loop}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Tracking Box Area =================-->
+

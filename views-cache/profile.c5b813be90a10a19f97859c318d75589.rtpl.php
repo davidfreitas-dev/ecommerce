@@ -40,7 +40,7 @@
                         <?php echo htmlspecialchars( $profileError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </div>
                     <?php } ?>
-                    <h2>Customer Info</h2>
+                    <h3>Customer Info</h3>
                     <form class="row tracking_form" action="/profile" method="post">
                         <div class="col-md-12 form-group">
                             <input type="text" class="single-input" id="desperson" name="desperson" value="<?php echo htmlspecialchars( $user["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
