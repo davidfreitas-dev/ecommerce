@@ -33,11 +33,20 @@
                     <h3 class="mb-5 ml-2">Order Details</h3>
                     <div class="order-details">
                         <div class="order-address px-3">
-                            <h5>Shipping Address</h5>
+                            <h5>Shipping</h5>
                             <div class="details p-3">
-                                <p><?php echo htmlspecialchars( $order["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>, <?php echo htmlspecialchars( $order["desnumber"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $order["descomplement"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
-                                <p><?php echo htmlspecialchars( $order["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $order["desstate"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                                <p>Customer: <?php echo htmlspecialchars( $order["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                                <p>Address: <?php echo htmlspecialchars( $order["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>, <?php echo htmlspecialchars( $order["desnumber"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $order["descomplement"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $order["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $order["desstate"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
                                 <p>CEP: <?php echo htmlspecialchars( $order["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
+                            </div>
+                        </div>
+
+                        <div class="order-price px-3">
+                            <h5>Payment Values</h5>
+                            <div class="details p-3">
+                                <p>Subtotal: R$<?php echo formatPrice($cart["vlsubtotal"]); ?></p>
+                                <p>Freight: R$<?php echo formatPrice($cart["vlfreight"]); ?></p>
+                                <p>Total: R$<?php echo formatPrice($cart["vltotal"]); ?></p>
                             </div>
                         </div>
 
@@ -64,15 +73,6 @@
                                     </tbody>
                                     <?php } ?>
                                 </table>                             
-                            </div>
-                        </div>
-
-                        <div class="order-price px-3">
-                            <h5>Payment Values</h5>
-                            <div class="details p-3">
-                                <p>Subtotal: R$<?php echo formatPrice($cart["vlsubtotal"]); ?></p>
-                                <p>Freight: R$<?php echo formatPrice($cart["vlfreight"]); ?></p>
-                                <p>Total: R$<?php echo formatPrice($cart["vltotal"]); ?></p>
                             </div>
                         </div>
                     </div>

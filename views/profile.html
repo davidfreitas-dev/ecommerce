@@ -30,6 +30,8 @@
                 <!-- /.col-lg-3 -->
 
                 <div class="col-lg-9 col-md-8">
+                    <h3 class="mb-4 ml-2">Account</h3>
+
                     {if="$profileMsg != ''"}
                     <div class="alert alert-success col-md-9">
                         {$profileMsg}
@@ -40,18 +42,18 @@
                         {$profileError}
                     </div>
                     {/if}
-                    <h3 class="mb-4 ml-2">Account</h3>
+                    
                     <form class="row tracking_form" action="/profile" method="post">
                         <div class="col-md-12 form-group">
-                            <input type="text" class="single-input" id="desperson" name="desperson" value="{$user.desperson}">
+                            <input type="text" class="form-control" id="desperson" name="desperson" value="{$user.desperson}">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="email" class="single-input" id="desemail" name="desemail" value="{$user.desemail}">
+                            <input type="email" class="form-control" id="desemail" name="desemail" value="{$user.desemail}">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="single-input" id="nrphone" name="nrphone" value="{$user.nrphone}">
+                            <input type="text" class="form-control" id="nrphone" name="nrphone" value="{$user.nrphone}">
                         </div>
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-group mt-3">
                             <button type="submit" value="submit" class="btn submit_btn">Save</button>
                         </div>
                     </form>

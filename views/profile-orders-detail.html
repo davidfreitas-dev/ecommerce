@@ -33,11 +33,20 @@
                     <h3 class="mb-5 ml-2">Order Details</h3>
                     <div class="order-details">
                         <div class="order-address px-3">
-                            <h5>Shipping Address</h5>
+                            <h5>Shipping</h5>
                             <div class="details p-3">
-                                <p>{$order.desaddress}, {$order.desnumber} - {$order.descomplement}</p>
-                                <p>{$order.desdistrict} - {$order.desstate}</p>
+                                <p>Customer: {$order.desperson}</p>
+                                <p>Address: {$order.desaddress}, {$order.desnumber} - {$order.descomplement} - {$order.desdistrict} - {$order.desstate}</p>
                                 <p>CEP: {$order.deszipcode}</p>
+                            </div>
+                        </div>
+
+                        <div class="order-price px-3">
+                            <h5>Payment Values</h5>
+                            <div class="details p-3">
+                                <p>Subtotal: R${function="formatPrice($cart.vlsubtotal)"}</p>
+                                <p>Freight: R${function="formatPrice($cart.vlfreight)"}</p>
+                                <p>Total: R${function="formatPrice($cart.vltotal)"}</p>
                             </div>
                         </div>
 
@@ -64,15 +73,6 @@
                                     </tbody>
                                     {/loop}
                                 </table>                             
-                            </div>
-                        </div>
-
-                        <div class="order-price px-3">
-                            <h5>Payment Values</h5>
-                            <div class="details p-3">
-                                <p>Subtotal: R${function="formatPrice($cart.vlsubtotal)"}</p>
-                                <p>Freight: R${function="formatPrice($cart.vlfreight)"}</p>
-                                <p>Total: R${function="formatPrice($cart.vltotal)"}</p>
                             </div>
                         </div>
                     </div>

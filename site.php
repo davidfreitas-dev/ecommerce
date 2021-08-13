@@ -691,17 +691,22 @@ $app->post("/profile/change-password", function(){
 
 	}
 
-	if (!isset($_POST['new_pass']) || $_POST['new_pass'] === '') {
+	$uppercase = preg_match('/[A-Z]/', $_POST['new_pass']);
+	$lowercase = preg_match('/[a-z]/', $_POST['new_pass']);
+	$number    = preg_match('/\d/', $_POST['new_pass']);
+	$special   = preg_match('/\W/', $_POST['new_pass']);
 
-		User::setError("Digite a nova senha.");
+	if(!$special || !$uppercase || !$lowercase || !$number || strlen($_POST['new_pass']) < 8) {
+
+		User::setError("A senha informada não atende ao padrão mínimo de segurança exigido.");
 		header("Location: /profile/change-password");
 		exit;
 
 	}
 
-	if (!isset($_POST['new_pass_confirm']) || $_POST['new_pass_confirm'] === '') {
+	if (!isset($_POST['new_pass']) || $_POST['new_pass'] === '') {
 
-		User::setError("Confirme a nova senha.");
+		User::setError("Digite a nova senha.");
 		header("Location: /profile/change-password");
 		exit;
 
@@ -715,11 +720,27 @@ $app->post("/profile/change-password", function(){
 
 	}
 
+	if (!isset($_POST['new_pass_confirm']) || $_POST['new_pass_confirm'] === '') {
+
+		User::setError("Confirme a nova senha.");
+		header("Location: /profile/change-password");
+		exit;
+
+	}
+
+	if ($_POST['new_pass'] != $_POST['new_pass_confirm']) {
+
+		User::setError("A senha de confirmação deve ser igual a nova senha.");
+		header("Location: /profile/change-password");
+		exit;
+
+	}
+
 	$user = User::getFromSession();
 
 	if (!password_verify($_POST['current_pass'], $user->getdespassword())) {
 
-		User::setError("A senha está inválida.");
+		User::setError("A senha atual está incorreta.");
 		header("Location: /profile/change-password");
 		exit;			
 
@@ -728,6 +749,8 @@ $app->post("/profile/change-password", function(){
 	$user->setdespassword($_POST['new_pass']);
 
 	$user->update();
+	
+	$_SESSION[User::SESSION] = $user->getValues();
 
 	User::setSuccess("Senha alterada com sucesso.");
 

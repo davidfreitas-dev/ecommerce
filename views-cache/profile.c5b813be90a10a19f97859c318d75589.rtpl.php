@@ -30,6 +30,8 @@
                 <!-- /.col-lg-3 -->
 
                 <div class="col-lg-9 col-md-8">
+                    <h3 class="mb-4 ml-2">Account</h3>
+
                     <?php if( $profileMsg != '' ){ ?>
                     <div class="alert alert-success col-md-9">
                         <?php echo htmlspecialchars( $profileMsg, ENT_COMPAT, 'UTF-8', FALSE ); ?>
@@ -40,18 +42,18 @@
                         <?php echo htmlspecialchars( $profileError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
                     </div>
                     <?php } ?>
-                    <h3 class="mb-4 ml-2">Account</h3>
+                    
                     <form class="row tracking_form" action="/profile" method="post">
                         <div class="col-md-12 form-group">
-                            <input type="text" class="single-input" id="desperson" name="desperson" value="<?php echo htmlspecialchars( $user["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" class="form-control" id="desperson" name="desperson" value="<?php echo htmlspecialchars( $user["desperson"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="email" class="single-input" id="desemail" name="desemail" value="<?php echo htmlspecialchars( $user["desemail"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="email" class="form-control" id="desemail" name="desemail" value="<?php echo htmlspecialchars( $user["desemail"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="single-input" id="nrphone" name="nrphone" value="<?php echo htmlspecialchars( $user["nrphone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                            <input type="text" class="form-control" id="nrphone" name="nrphone" value="<?php echo htmlspecialchars( $user["nrphone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                         </div>
-                        <div class="col-md-12 form-group">
+                        <div class="col-md-12 form-group mt-3">
                             <button type="submit" value="submit" class="btn submit_btn">Save</button>
                         </div>
                     </form>
