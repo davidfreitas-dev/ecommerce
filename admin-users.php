@@ -33,6 +33,19 @@ $app->post("/admin/users/:iduser/password", function($iduser){
 
 	}
 
+	$uppercase = preg_match('/[A-Z]/', $_POST['despassword']);
+	$lowercase = preg_match('/[a-z]/', $_POST['despassword']);
+	$number    = preg_match('/\d/', $_POST['despassword']);
+	$special   = preg_match('/\W/', $_POST['despassword']);
+
+	if(!$special || !$uppercase || !$lowercase || !$number || strlen($_POST['despassword']) < 8) {
+
+		User::setError("A senha informada não atende ao padrão mínimo de segurança exigido.");
+		header("Location: /admin/users/$iduser/password");
+		exit;
+
+	}
+
 	if (!isset($_POST['despassword-confirm']) || $_POST['despassword-confirm']==='') {
 
 		User::setError("Preencha a confirmação da nova senha.");

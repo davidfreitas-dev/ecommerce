@@ -508,8 +508,6 @@ $app->post("/profile", function(){
 		exit;
 	}
 
-	$user = User::getFromSession();
-
 	if ($_POST['desemail'] !== $user->getdesemail()) {
 
 		if (User::checkLoginExists($_POST['desemail']) === true) {
@@ -521,6 +519,8 @@ $app->post("/profile", function(){
 		}
 
 	}
+
+	$user = User::getFromSession();
 
 	$_POST['inadmin'] = $user->getinadmin();
 	$_POST['despassword'] = $user->getdespassword();
