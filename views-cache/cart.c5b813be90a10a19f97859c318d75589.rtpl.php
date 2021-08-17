@@ -135,7 +135,7 @@
                     <td></td>
                     <td>
                       <div class="checkout_btn_inner">
-                        <a class="gray_btn" href="#">Continue Shopping</a>
+                        <a class="gray_btn" href="/">Continue Shopping</a>
                         <button class="main_btn" type="submit">Proceed to checkout</button>
                       </div>
                     </td>

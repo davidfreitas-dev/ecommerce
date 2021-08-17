@@ -39,6 +39,9 @@
                       <div class="mt-3">
                         <span class="mr-4">R$<?php echo formatPrice($value1["vlprice"]); ?></span>
                       </div>
+                      <div class="mt-3 mb-3">
+                        <a href="/cart/<?php echo htmlspecialchars( $value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" class="btn btn-primary">COMPRAR</a>
+                      </div>
                     </div>
                   </div>
                 </div>

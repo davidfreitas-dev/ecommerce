@@ -47,23 +47,8 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                   </li>
-                  <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Shop</a>
-                    <ul class="dropdown-menu">
-                      <li class="nav-item">
-                        <a class="nav-link" href="/res/site/category.html">Shop Category</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="/res/site/single-product.html">Product Details</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="/res/site/checkout.html">Product Checkout</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="/res/site/cart.html">Shopping Cart</a>
-                      </li>
-                    </ul>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Shop</a>
                   </li>
                   <li class="nav-item submenu dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -72,20 +57,11 @@
                       <?php require $this->checkTemplate("categories-menu");?>
                     </ul>
                   </li>
-                  <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Pages</a>
-                    <ul class="dropdown-menu">
-                      <li class="nav-item">
-                        <a class="nav-link" href="/res/site/tracking.html">Tracking</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="/res/site/elements.html">Elements</a>
-                      </li>
-                    </ul>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pages</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/res/site/contact.html">Contact</a>
+                    <a class="nav-link" href="/contact">Contact</a>
                   </li>
                 </ul>
               </div>

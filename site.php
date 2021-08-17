@@ -759,5 +759,13 @@ $app->post("/profile/change-password", function(){
 
 });
 
+$app->get('/contact', function() {
+
+	$page = new Page();
+
+	$page->setTpl("contact");
+
+});
+
 
  ?>

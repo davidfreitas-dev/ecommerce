@@ -91,6 +91,9 @@
               <div class="mt-3">
                 <span class="mr-4">R$<?php echo formatPrice($value1["vlprice"]); ?></span>
               </div>
+              <div class="mt-3 mb-3">
+                <a href="/cart/<?php echo htmlspecialchars( $value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" class="btn btn-primary">COMPRAR</a>
+              </div>
             </div>
           </div>
         </div>
@@ -144,81 +147,28 @@
 
         <div class="col-lg-6 mt-5 mt-lg-0">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-6">
-              <a href="#">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="img-fluid w-100" src="/res/site/img/product/memoria.png" alt="" />
+            <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
+            <div class="col-lg-6 col-md-6 col-6">          
+              <div class="single-product">
+                <div class="product-img">
+                  <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <img class="img-fluid w-100" src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="" />
+                  </a>
+                </div>
+                <div class="product-btm">
+                  <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="d-block">
+                    <h4><?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h4>
+                  </a>
+                  <div class="mt-3">
+                    <span class="mr-4">R$<?php echo formatPrice($value1["vlprice"]); ?></span>
                   </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Latest products</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
-                    </div>
+                  <div class="mt-3 mb-3">
+                    <a href="/cart/<?php echo htmlspecialchars( $value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" class="btn btn-primary">COMPRAR</a>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
-
-            <div class="col-lg-6 col-md-6 col-6">
-              <a href="#">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="img-fluid w-100" src="/res/site/img/product/gabinete.png" alt="" />
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Latest products</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-6">
-              <a href="#">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="img-fluid w-100" src="/res/site/img/product/intel.png" alt="" />
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Latest products</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-6">
-              <a href="#">
-                <div class="single-product">
-                  <div class="product-img">
-                    <img class="img-fluid w-100" src="/res/site/img/product/amd.png" alt="" />
-                  </div>
-                  <div class="product-btm">
-                    <a href="#" class="d-block">
-                      <h4>Latest products</h4>
-                    </a>
-                    <div class="mt-3">
-                      <span class="mr-4">$25.00</span>
-                      <del>$35.00</del>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -239,157 +189,28 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/memoria.png" alt="" />
+        <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
+        <div class="col-lg-3 col-md-6 col-6">          
+          <div class="single-product">
+            <div class="product-img">
+              <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                <img class="img-fluid w-100" src="<?php echo htmlspecialchars( $value1["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" alt="" />
+              </a>
+            </div>
+            <div class="product-btm">
+              <a href="/products/<?php echo htmlspecialchars( $value1["desurl"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="d-block">
+                <h4><?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h4>
+              </a>
+              <div class="mt-3">
+                <span class="mr-4">R$<?php echo formatPrice($value1["vlprice"]); ?></span>
               </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
+              <div class="mt-3 mb-3">
+                <a href="/cart/<?php echo htmlspecialchars( $value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" class="btn btn-primary">COMPRAR</a>
               </div>
             </div>
-          </a>
+          </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/placa-mae.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/amd.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/intel.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/kitgamer.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/ssd-nvme.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/placa-mae.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-3 col-md-6 col-6">
-          <a href="#">
-            <div class="single-product">
-              <div class="product-img">
-                <img class="img-fluid w-100" src="/res/site/img/product/memoria.png" alt="" />
-              </div>
-              <div class="product-btm">
-                <a href="#" class="d-block">
-                  <h4>Latest products</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">$25.00</span>
-                  <del>$35.00</del>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
+        <?php } ?>
       </div>
     </div>
   </section>

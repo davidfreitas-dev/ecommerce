@@ -2465,7 +2465,7 @@ fieldset:disabled a.btn {
 .btn-primary {
     color: #fff;
     background-color: #1abb9c;
-    border-color: #1abb9c;
+    border: 1px solid #1abb9c;
     font-size: .85rem;
     font-weight: 500;
     padding: .5rem 1.5rem;
@@ -2474,12 +2474,7 @@ fieldset:disabled a.btn {
 .btn-primary:hover {
     color: #1abb9c;
     background-color: transparent;
-    border-color: #1abb9c;
-}
-
-.btn-primary.focus,
-.btn-primary:focus {
-    box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5)
+    border: 1px solid #1abb9c;
 }
 
 .btn-primary.disabled,
