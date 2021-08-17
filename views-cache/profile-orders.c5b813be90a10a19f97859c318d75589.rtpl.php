@@ -43,10 +43,14 @@
                             <?php $counter1=-1;  if( isset($orders) && ( is_array($orders) || $orders instanceof Traversable ) && sizeof($orders) ) foreach( $orders as $key1 => $value1 ){ $counter1++; ?>
                             <div class="table-row">
                                 <div class="serial"><?php echo htmlspecialchars( $value1["idorder"], ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
-                                <div class="country"><?php echo htmlspecialchars( $value1["dtregister"], ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
+                                <div class="country"><?php echo formatDate($value1["dtregister"]); ?></div>
                                 <div class="visit"><?php echo formatPrice($value1["vltotal"]); ?></div>
                                 <div class="percentage"><?php echo htmlspecialchars( $value1["desstatus"], ENT_COMPAT, 'UTF-8', FALSE ); ?></div>
                                 <div class="visit"><a href="/profile/orders/<?php echo htmlspecialchars( $value1["idorder"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-sm">Detalhes</a></div>
+                            </div>
+                            <?php }else{ ?>
+                            <div class="alert">
+                                Nenhum pedido foi encontrado.
                             </div>
                             <?php } ?>
                         </div>

@@ -43,10 +43,14 @@
                             {loop="$orders"}
                             <div class="table-row">
                                 <div class="serial">{$value.idorder}</div>
-                                <div class="country">{$value.dtregister}</div>
+                                <div class="country">{function="formatDate($value.dtregister)"}</div>
                                 <div class="visit">{function="formatPrice($value.vltotal)"}</div>
                                 <div class="percentage">{$value.desstatus}</div>
                                 <div class="visit"><a href="/profile/orders/{$value.idorder}" class="btn btn-primary btn-sm">Detalhes</a></div>
+                            </div>
+                            {else}
+                            <div class="alert">
+                                Nenhum pedido foi encontrado.
                             </div>
                             {/loop}
                         </div>
