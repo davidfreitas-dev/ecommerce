@@ -67,13 +67,24 @@ class Product extends Model {
 
 	public function delete()
 	{
-
+			
 		$sql = new Sql();
-
-		$sql->query("DELETE FROM tb_products WHERE idproduct = :idproduct", [
+		
+		$sql->query("CALL sp_products_delete(:idproduct)", [
 			':idproduct'=>$this->getidproduct()
 		]);
 
+		$filename = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 
+		"res" . DIRECTORY_SEPARATOR . 
+		"site" . DIRECTORY_SEPARATOR . 
+		"img" . DIRECTORY_SEPARATOR . 
+		"products" . DIRECTORY_SEPARATOR . 
+		$this->getidproduct() . ".jpg";
+		
+		if (file_exists($filename)) {
+			unlink($filename);
+		}
+		
 	}
 
 	public function checkPhoto()
