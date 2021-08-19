@@ -6,12 +6,11 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-              <h2>Contact Us</h2>
-              <p>Very us move be blessed multiply night</p>
-            </div>
-            <div class="page_link">
-              <a href="/">Home</a>
-              <a href="">Contact Us</a>
+              <h2>Contact Us</h2>              
+              <div class="page_link">
+                <a href="/">Home</a>
+                <a href="/contact">Contact Us</a>
+              </div>
             </div>
           </div>
         </div>
