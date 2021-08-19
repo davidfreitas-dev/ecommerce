@@ -1,4 +1,4 @@
-    <!--================Home Banner Area =================-->
+<?php if(!class_exists('Rain\Tpl')){exit;}?>    <!--================Home Banner Area =================-->
     <section class="banner_area">
       <div class="banner_inner d-flex align-items-center">
         <div class="container">
@@ -64,7 +64,7 @@
                   <div class="carousel-item active">
                     <img
                       class="d-block w-100"
-                      src="{$product.desphoto}"
+                      src="<?php echo htmlspecialchars( $product["desphoto"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"
                       alt="First slide"
                     />
                   </div>
@@ -89,16 +89,16 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <div class="s_product_text">
-              <h3>{$product.desproduct}</h3>
-              <h2>R${function="formatPrice($product.vlprice)"}</h2>
+              <h3><?php echo htmlspecialchars( $product["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></h3>
+              <h2>R$<?php echo formatPrice($product["vlprice"]); ?></h2>
               <ul class="list">
                 <li>
                     <span>Category:&ensp;</span>
-                    {loop="$categories"}
-                    <a class="active" href="/categories/{$value.idcategory}">
-                      {$value.descategory}&ensp;
+                    <?php $counter1=-1;  if( isset($categories) && ( is_array($categories) || $categories instanceof Traversable ) && sizeof($categories) ) foreach( $categories as $key1 => $value1 ){ $counter1++; ?>
+                    <a class="active" href="/categories/<?php echo htmlspecialchars( $value1["idcategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                      <?php echo htmlspecialchars( $value1["descategory"], ENT_COMPAT, 'UTF-8', FALSE ); ?>&ensp;
                     </a>
-                    {/loop}
+                    <?php } ?>
                 </li>
                 <li>
                   <span>Availibility:&ensp;</span>
@@ -106,9 +106,9 @@
                 </li>
               </ul>
               <p>
-                {$product.desdescription}
+                <?php echo htmlspecialchars( $product["desdescription"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
               </p>
-              <form action="/cart/{$product.idproduct}/add" class="cart">
+              <form action="/cart/<?php echo htmlspecialchars( $product["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/add" class="cart">
                 <div class="product_count">
                   <label for="qty">Quantity:</label>
                   <input

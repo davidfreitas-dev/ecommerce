@@ -64,6 +64,8 @@ $app->post("/admin/products/create", function(){
 
 	$product = new Product();
 
+	$_POST["instock"] = (isset($_POST["instock"]))?1:0;
+
 	$product->setData($_POST);
 
 	$product->save();
@@ -94,6 +96,8 @@ $app->post("/admin/products/:idproduct", function($idproduct){
 	User::verifyLogin();
 
 	$product = new Product();
+
+	$_POST["instock"] = (isset($_POST["instock"]))?1:0;
 
 	$product->get((int)$idproduct);
 

@@ -37,14 +37,17 @@ class Product extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_products_save(:idproduct, :desproduct, :vlprice, :vlwidth, :vlheight, :vllength, :vlweight, :desurl)", array(
+		$results = $sql->select("CALL sp_products_save(:idproduct, :desproduct, :desdescription, :vlprice, :vlwidth, :vlheight, :vllength, :vlweight, :inventory, :instock, :desurl)", array(
 			":idproduct"=>$this->getidproduct(),
 			":desproduct"=>$this->getdesproduct(),
+			":desdescription"=>$this->getdesdescription(),
 			":vlprice"=>$this->getvlprice(),
 			":vlwidth"=>$this->getvlwidth(),
 			":vlheight"=>$this->getvlheight(),
 			":vllength"=>$this->getvllength(),
 			":vlweight"=>$this->getvlweight(),
+			":inventory"=>$this->getinventory(),
+			":instock"=>$this->getinstock(),
 			":desurl"=>$this->getdesurl()
 		));
 
