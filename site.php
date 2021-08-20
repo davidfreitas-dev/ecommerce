@@ -298,10 +298,15 @@ $app->get("/order/:idorder/pagseguro", function($idorder){
 		'footer'=>false
 	]);
 
+	$productsTotals = $cart->getProductsTotals();
+
+	$freightPerProduct = number_format(($cart->getvlfreight() / $productsTotals["nrqtd"]), 2, '.', '');
+
 	$page->setTpl("payment-pagseguro", [
 		'order'=>$order->getValues(),
 		'cart'=>$cart->getValues(),
 		'products'=>$cart->getProducts(),
+		"freight"=>$freightPerProduct,
 		'phone'=>[
 			'areaCode'=>substr($order->getnrphone(), 0, 2),
 			'number'=>substr($order->getnrphone(), 2, strlen($order->getnrphone()))
