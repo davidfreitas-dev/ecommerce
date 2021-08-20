@@ -8,6 +8,15 @@ use \Store\Mailer;
 
 class Product extends Model {
 
+	public static function limitedListProducts()
+	{
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_products ORDER BY desproduct LIMIT 4");
+
+	}
+
 	public static function listAll()
 	{
 

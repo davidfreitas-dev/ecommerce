@@ -11,7 +11,7 @@ use \Store\Model\OrderStatus;
 
 $app->get('/', function() {
 
-	$products = Product::listAll();
+	$products = Product::limitedListProducts();
 
 	$page = new Page();
 

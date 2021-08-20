@@ -102,7 +102,7 @@
                 </li>
                 <li>
                   <span>Availibility:&ensp;</span>
-                  <a href="#">In Stock</a>
+                  <?php if( $product["inventory"] > 0 ){ ?><span><?php echo htmlspecialchars( $product["inventory"], ENT_COMPAT, 'UTF-8', FALSE ); ?> In Stock</span><?php } ?>
                 </li>
               </ul>
               <p>

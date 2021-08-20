@@ -102,7 +102,7 @@
                 </li>
                 <li>
                   <span>Availibility:&ensp;</span>
-                  <a href="#">In Stock</a>
+                  {if="$product.inventory > 0"}<span>{$product.inventory} In Stock</span>{/if}
                 </li>
               </ul>
               <p>

@@ -1,4 +1,4 @@
-    <!--================Home Banner Area =================-->
+<?php if(!class_exists('Rain\Tpl')){exit;}?>    <!--================Home Banner Area =================-->
     <section class="banner_area">
       <div class="banner_inner d-flex align-items-center">
         <div class="container">
@@ -35,11 +35,11 @@
         <div class="billing_details">          
           <div class="row">
             <div class="col-lg-7 mb-5">
-              {if="$error != ''"}
+              <?php if( $error != '' ){ ?>
               <div class="alert alert-danger">
-                {$error}
+                <?php echo htmlspecialchars( $error, ENT_COMPAT, 'UTF-8', FALSE ); ?>
               </div>
-              {/if}
+              <?php } ?>
 
               <h3>Billing Details</h3>
 
@@ -47,11 +47,11 @@
               <button type="submit" class="main_btn ml-3 mb-3" formaction="/checkout" formmethod="get">Buscar CEP</button>
               
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zipcode" value="{$cart.deszipcode}"/>
+                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zipcode" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
               </div>
 
               <div class="col-md-9 form-group p_star">
-                <input type="text" class="form-control" id="address" name="desaddress" placeholder="Address" value="{$address.desaddress}"/>
+                <input type="text" class="form-control" id="address" name="desaddress" placeholder="Address" value="<?php echo htmlspecialchars( $address["desaddress"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
               </div>
 
               <div class="col-md-3 form-group p_star">
@@ -63,19 +63,19 @@
               </div>
 
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="district" name="desdistrict" placeholder="Neighborhood" value="{$address.desdistrict}"/>
+                <input type="text" class="form-control" id="district" name="desdistrict" placeholder="Neighborhood" value="<?php echo htmlspecialchars( $address["desdistrict"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
               </div>
 
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="city" name="descity" placeholder="City" value="{$address.descity}"/>
+                <input type="text" class="form-control" id="city" name="descity" placeholder="City" value="<?php echo htmlspecialchars( $address["descity"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
               </div>
 
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="state" name="desstate" placeholder="State" value="{$address.desstate}"/>
+                <input type="text" class="form-control" id="state" name="desstate" placeholder="State" value="<?php echo htmlspecialchars( $address["desstate"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
               </div>
               
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="country" name="descountry" placeholder="Country" value="{$address.descountry}"/>
+                <input type="text" class="form-control" id="country" name="descountry" placeholder="Country" value="<?php echo htmlspecialchars( $address["descountry"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"/>
               </div>
             </div>
             <div class="col-lg-5">
@@ -89,32 +89,32 @@
                     </a>
                   </li>
                   <li>
-                    {loop="$products"}
+                    <?php $counter1=-1;  if( isset($products) && ( is_array($products) || $products instanceof Traversable ) && sizeof($products) ) foreach( $products as $key1 => $value1 ){ $counter1++; ?>
                     <a href="#">
-                      {$value.desproduct}
-                      <span class="middle">x {$value.nrqtd}</span>
-                      <span class="last">R${function="formatPrice($value.vltotal)"}</span>
+                      <?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
+                      <span class="middle">x <?php echo htmlspecialchars( $value1["nrqtd"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+                      <span class="last">R$<?php echo formatPrice($value1["vltotal"]); ?></span>
                     </a>
-                    {/loop}
+                    <?php } ?>
                   </li>
                 </ul>
                 <ul class="list list_2">
                   <li>
                     <a href="#">Subtotal
-                      <span>R${function="formatPrice($cart.vlsubtotal)"}</span>
+                      <span>R$<?php echo formatPrice($cart["vlsubtotal"]); ?></span>
                     </a>
                   </li>
                   <li>
                     <a href="#"
                       >Shipping
-                      <span>R${function="formatPrice($cart.vlfreight)"}</span>
+                      <span>R$<?php echo formatPrice($cart["vlfreight"]); ?></span>
                       <input type="hidden" class="shipping_method" value="free_shipping" id="shipping_method_0" data-index="0" name="shipping_method[0]">
                     </a>
                   </li>
                   <li>
                     <a href="#"
                       >Total
-                      <span>R${function="formatPrice($cart.vltotal)"}</span>
+                      <span>R$<?php echo formatPrice($cart["vltotal"]); ?></span>
                     </a>
                   </li>
                 </ul>
