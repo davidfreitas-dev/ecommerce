@@ -45,7 +45,6 @@ class Cart extends Model {
 
 				$cart->setToSession();
 
-
 			}
 
 		}

@@ -49,6 +49,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="/admin/orders/<?php echo htmlspecialchars( $order["idorder"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-outline-default">Ver detalhes</a>
                 </div>
             </form>
             </div>

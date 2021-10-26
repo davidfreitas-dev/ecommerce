@@ -6,6 +6,7 @@ use \Store\DB\Sql;
 use \Store\Model;
 use \Store\Model\Cart;
 use \Store\Model\OrderStatus;
+use \Store\Model\PaymentMethod;
 
 class Order extends Model {
 
@@ -17,12 +18,13 @@ class Order extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_orders_save(:idorder, :idcart, :iduser, :idstatus, :idaddress, :vltotal)", [
+		$results = $sql->select("CALL sp_orders_save(:idorder, :idcart, :iduser, :idstatus, :idaddress, :idpaymentmethod, :vltotal)", [
 			':idorder'=>$this->getidorder(),
 			':idcart'=>$this->getidcart(),
 			':iduser'=>$this->getiduser(),
 			':idstatus'=>$this->getidstatus(),
 			':idaddress'=>$this->getidaddress(),
+			':idpaymentmethod'=>$this->getidpaymentmethod(),
 			':vltotal'=>$this->getvltotal()
 		]);
 
@@ -44,7 +46,8 @@ class Order extends Model {
 			INNER JOIN tb_carts c USING(idcart)
 			INNER JOIN tb_users d ON d.iduser = a.iduser
 			INNER JOIN tb_addresses e USING(idaddress)
-			INNER JOIN tb_persons f ON f.idperson = d.idperson
+			INNER JOIN tb_paymentmethods f USING(idpaymentmethod)
+			INNER JOIN tb_persons g ON g.idperson = d.idperson
 			WHERE a.idorder = :idorder
 		", [
 			':idorder'=>$idorder
@@ -104,6 +107,17 @@ class Order extends Model {
 		$status->get((int)$this->getidstatus());
 		
 		return $status;		
+
+	}
+
+	public function getMethod():PaymentMethod
+	{
+
+		$method = new PaymentMethod();
+
+		$method->get((int)$this->getidpaymentmethod());
+		
+		return $method;		
 
 	}
 

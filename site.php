@@ -238,6 +238,8 @@ $app->post("/checkout", function(){
 		exit;
 	}
 
+	$paymentMethod = isset($_POST['payment-method']) ? $_POST['payment-method'] : ''; 
+
 	$user = User::getFromSession();
 
 	$address = new Address();
@@ -259,7 +261,8 @@ $app->post("/checkout", function(){
 		'idcart'=>$cart->getidcart(),
 		'idaddress'=>$address->getidaddress(),
 		'iduser'=>$user->getiduser(),
-		'idstatus'=>OrderStatus::EM_ABERTO,
+		'idstatus'=>OrderStatus::AGUARDANDO_PAGAMENTO,
+		'idpaymentmethod'=>$paymentMethod,
 		'vltotal'=>$cart->getvltotal()
 	]);
 
@@ -267,7 +270,7 @@ $app->post("/checkout", function(){
 
 	$cart->removeSession();
 
-	switch ((int)$_POST['payment-method']) {
+	switch ($paymentMethod) {
 
 		case 1:
 		header("Location: /order/".$order->getidorder()."/pagseguro");
@@ -275,6 +278,14 @@ $app->post("/checkout", function(){
 
 		case 2:
 		header("Location: /order/".$order->getidorder()."/paypal");
+		break;
+
+		case 3:
+		// Método de pagamento PIX
+		break;
+
+		case 4:
+		// Método de pagamento Boleto
 		break;
 
 	}

@@ -32,7 +32,7 @@
                 Avenida Principal, 10 - Centro<br>
                 São Paulo - SP<br>
                 Telefone: (11) 99999-9999<br>
-                E-mail: teste@email.com
+                E-mail: virtualstore@email.com
             </address>
             </div>
             <!-- /.col -->
@@ -95,11 +95,11 @@
                     <tbody>
                     <tr>
                         <th style="width:180px;">Método de Pagamento:</th>
-                        <td>Boleto</td>
+                        <td><?php echo htmlspecialchars( $method["desmethod"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     </tr>
                     <tr>
                         <th>Parcelas:</th>
-                        <td>1x</td>
+                        <td>-</td>
                     </tr>
                     <!--
                     <tr>
