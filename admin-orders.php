@@ -74,11 +74,14 @@ $app->get("/admin/orders/:idorder", function($idorder){
 
 	$cart = $order->getCart();
 
+	$status = $order->getStatus();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("order", [
 		'order'=>$order->getValues(),
 		'cart'=>$cart->getValues(),
+		'status'=>$status->getValues(),
 		'products'=>$cart->getProducts()
 	]);
 

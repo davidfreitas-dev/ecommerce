@@ -5,6 +5,7 @@ namespace Store\Model;
 use \Store\DB\Sql;
 use \Store\Model;
 use \Store\Model\Cart;
+use \Store\Model\OrderStatus;
 
 class Order extends Model {
 
@@ -92,6 +93,17 @@ class Order extends Model {
 		$cart->get((int)$this->getidcart());
 
 		return $cart;
+
+	}
+
+	public function getStatus():OrderStatus
+	{
+
+		$status = new OrderStatus();
+
+		$status->get((int)$this->getidstatus());
+		
+		return $status;		
 
 	}
 

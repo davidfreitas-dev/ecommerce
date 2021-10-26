@@ -29,8 +29,8 @@
             De
             <address>
                 <strong>VIRTUAL STORE</strong><br>
-                Avenida Principal, 234 - Brás<br>
-                São Bernardo do Campo - SP<br>
+                Avenida Principal, 10 - Centro<br>
+                São Paulo - SP<br>
                 Telefone: (11) 99999-9999<br>
                 E-mail: teste@email.com
             </address>
@@ -51,7 +51,7 @@
             <b>Pedido #{$order.idorder}</b><br>
             <br>
             <b>Emitido em:</b> {function="formatDate($order.dtregister)"}<br>
-            <b>Pago em:</b> {function="formatDate($order.dtregister)"}
+            <b>Status:</b> {$status.desstatus}
             </div>
             <!-- /.col -->
         </div>
@@ -75,7 +75,7 @@
                     <td>{$value.nrqtd}</td>
                     <td>{$value.desproduct}</td>
                     <td>{$value.idproduct}</td>
-                    <td>R${function="formatPrice($order.vltotal)"}</td>
+                    <td>R${function="formatPrice($value.vlprice)"}</td>
                 </tr>
                 {/loop}
                 </tbody>

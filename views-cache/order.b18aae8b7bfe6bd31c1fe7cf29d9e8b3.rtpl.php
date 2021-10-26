@@ -29,8 +29,8 @@
             De
             <address>
                 <strong>VIRTUAL STORE</strong><br>
-                Avenida Principal, 234 - Brás<br>
-                São Bernardo do Campo - SP<br>
+                Avenida Principal, 10 - Centro<br>
+                São Paulo - SP<br>
                 Telefone: (11) 99999-9999<br>
                 E-mail: teste@email.com
             </address>
@@ -51,7 +51,7 @@
             <b>Pedido #<?php echo htmlspecialchars( $order["idorder"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b><br>
             <br>
             <b>Emitido em:</b> <?php echo formatDate($order["dtregister"]); ?><br>
-            <b>Pago em:</b> <?php echo formatDate($order["dtregister"]); ?>
+            <b>Status:</b> <?php echo htmlspecialchars( $status["desstatus"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
             </div>
             <!-- /.col -->
         </div>
@@ -75,7 +75,7 @@
                     <td><?php echo htmlspecialchars( $value1["nrqtd"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["desproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["idproduct"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td>R$<?php echo formatPrice($order["vltotal"]); ?></td>
+                    <td>R$<?php echo formatPrice($value1["vlprice"]); ?></td>
                 </tr>
                 <?php } ?>
                 </tbody>
