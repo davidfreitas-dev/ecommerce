@@ -89,6 +89,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="/res/site/js/theme.js"></script>
   <script src="/res/site/js/jquery.mask.min.js"></script>
   <script src="/res/site/js/validations.js"></script>
+  <script src="/res/site/js/ajax.js"></script>
 </body>
 
 </html>

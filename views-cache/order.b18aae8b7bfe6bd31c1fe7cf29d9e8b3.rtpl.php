@@ -94,12 +94,12 @@
                 <table class="table">
                     <tbody>
                     <tr>
-                        <th style="width:180px;">Método de Pagamento:</th>
+                        <th style="width:180px;">Forma de Pagamento:</th>
                         <td><?php echo htmlspecialchars( $method["desmethod"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     </tr>
                     <tr>
-                        <th>Parcelas:</th>
-                        <td>-</td>
+                        <th>Método de Envio:</th>
+                        <td><?php echo htmlspecialchars( $cart["desfreight"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     </tr>
                     <!--
                     <tr>

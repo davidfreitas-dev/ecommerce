@@ -105,12 +105,13 @@ class Cart extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :deszipcode, :vlfreight, :nrdays)", [
+		$results = $sql->select("CALL sp_carts_save(:idcart, :dessessionid, :iduser, :deszipcode, :vlfreight, :desfreight, :nrdays)", [
 			':idcart'=>$this->getidcart(),
 			':dessessionid'=>$this->getdessessionid(),
 			':iduser'=>$this->getiduser(),
 			':deszipcode'=>$this->getdeszipcode(),
 			':vlfreight'=>$this->getvlfreight(),
+			':desfreight'=>$this->getdesfreight(),
 			':nrdays'=>$this->getnrdays()
 		]);
 
@@ -214,7 +215,7 @@ class Cart extends Model {
 			$qs = http_build_query([
 				'nCdEmpresa'=>'',
 				'sDsSenha'=>'',
-				'nCdServico'=>'41106',
+				'nCdServico'=>'04510',
 				'sCepOrigem'=>'03005020',
 				'sCepDestino'=>$nrzipcode,
 				'nVlPeso'=>$totals['vlweight'],
@@ -242,6 +243,9 @@ class Cart extends Model {
 
 			}
 
+			$desfreight = 'PAC';
+
+			$this->setdesfreight($desfreight);
 			$this->setnrdays($result->PrazoEntrega);
 			$this->setvlfreight(Cart::formatValueToDecimal($result->Valor));
 			$this->setdeszipcode($nrzipcode);
