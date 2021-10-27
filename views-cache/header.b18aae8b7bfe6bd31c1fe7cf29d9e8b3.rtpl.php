@@ -115,7 +115,7 @@ desired effect
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
+      <div class="user-panel" style="margin: 10px 0;">
         <div class="pull-left image">
           <img src="/res/admin/dist/img/perfil-sem-foto.png" class="img-circle" alt="User Image">
         </div>
@@ -125,22 +125,10 @@ desired effect
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-
+      
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
+        <li class="header">MENU</li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="/admin/users"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
         <li><a href="/admin/categories"><i class="fa fa-tag"></i> <span>Categorias</span></a></li>
