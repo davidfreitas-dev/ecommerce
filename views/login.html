@@ -58,6 +58,9 @@
                                 <p>Don't have an account? Sign up here!</p>
                                 <form class="row tracking_form" action="/register" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group">
+                                        <input type="text" class="single-input" id="cpf" name="cpf" placeholder="CPF">
+                                    </div>
+                                    <div class="col-md-12 form-group">
                                         <input type="text" class="single-input" id="name" name="name" placeholder="Name">
                                     </div>
                                     <div class="col-md-12 form-group">

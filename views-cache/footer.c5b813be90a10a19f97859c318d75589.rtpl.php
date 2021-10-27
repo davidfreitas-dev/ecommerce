@@ -87,6 +87,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="/res/site/vendors/counter-up/jquery.counterup.js"></script>
   <script src="/res/site/js/mail-script.js"></script>
   <script src="/res/site/js/theme.js"></script>
+  <script src="/res/site/js/jquery.mask.min.js"></script>
+  <script src="/res/site/js/validations.js"></script>
 </body>
 
 </html>

@@ -135,12 +135,13 @@ class User extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :nrcpf, :inadmin)", array(
 			":desperson"=>$this->getdesperson(),
 			":deslogin"=>$this->getdeslogin(),
 			":despassword"=>User::getPasswordHash($this->getdespassword()),
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
+			":nrcpf"=>$this->getnrcpf(),
 			":inadmin"=>$this->getinadmin()
 		));
 
@@ -180,13 +181,14 @@ class User extends Model {
 
 		$sql = new Sql();
 
-		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :nrcpf, :inadmin)", array(
 			":iduser"=>$this->getiduser(),
 			":desperson"=>$this->getdesperson(),
 			":deslogin"=>$this->getdeslogin(),
 			":despassword"=>$password,
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
+			":nrcpf"=>$this->getnrcpf(),
 			":inadmin"=>$this->getinadmin()
 		));
 
@@ -407,6 +409,19 @@ class User extends Model {
 	{
 
 		$_SESSION[User::ERROR_REGISTER] = NULL;
+
+	}
+
+	public static function checkCPFExists($cpf)
+	{
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_persons WHERE nrcpf = :nrcpf", [
+			':nrcpf'=>$cpf
+		]);
+
+		return (count($results) > 0);
 
 	}
 

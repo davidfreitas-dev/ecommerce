@@ -393,6 +393,14 @@ $app->post("/register", function(){
 
 	$_SESSION['registerValues'] = $_POST;
 
+	if (!isset($_POST['cpf']) || $_POST['cpf'] == '') {
+
+		User::setErrorRegister("Preencha o campo CPF.");
+		header("Location: /login");
+		exit;
+
+	}
+
 	if (!isset($_POST['name']) || $_POST['name'] == '') {
 
 		User::setErrorRegister("Preencha o campo nome.");
@@ -417,6 +425,16 @@ $app->post("/register", function(){
 
 	}
 
+	$cpf = preg_replace('/[^0-9]/', '', $_POST['cpf']);
+
+	if (User::checkCPFExists($cpf) === true) {
+
+		User::setErrorRegister("CPF já utilizado.");
+		header("Location: /login");
+		exit;
+
+	}
+
 	if (User::checkLoginExists($_POST['email']) === true) {
 
 		User::setErrorRegister("Endereço de e-mail já utilizado.");
@@ -424,6 +442,8 @@ $app->post("/register", function(){
 		exit;
 
 	}
+
+	$phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
 
 	$user = new User();
 
@@ -433,7 +453,8 @@ $app->post("/register", function(){
 		'desperson'=>$_POST['name'],
 		'desemail'=>$_POST['email'],
 		'despassword'=>$_POST['password'],
-		'nrphone'=>$_POST['phone']
+		'nrphone'=>$phone,
+		'nrcpf'=>$cpf
 	]);
 
 	$user->save();
@@ -523,6 +544,8 @@ $app->get("/profile", function(){
 $app->post("/profile", function(){
 
 	User::verifyLogin(false);
+	
+	$user = User::getFromSession();
 
 	if (!isset($_POST['desperson']) || $_POST['desperson'] === '') {
 		User::setError("Preencha o seu nome.");
@@ -547,8 +570,6 @@ $app->post("/profile", function(){
 		}
 
 	}
-
-	$user = User::getFromSession();
 
 	$_POST['inadmin'] = $user->getinadmin();
 	$_POST['despassword'] = $user->getdespassword();
