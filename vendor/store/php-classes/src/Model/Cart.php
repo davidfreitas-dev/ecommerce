@@ -200,7 +200,7 @@ class Cart extends Model {
 
 	}
 
-	public function setFreight($nrzipcode)
+	public function setFreight($nrzipcode, $code)
 	{
 
 		$nrzipcode = preg_replace('/[^0-9]/', '', $nrzipcode);
@@ -215,7 +215,7 @@ class Cart extends Model {
 			$qs = http_build_query([
 				'nCdEmpresa'=>'',
 				'sDsSenha'=>'',
-				'nCdServico'=>'04510',
+				'nCdServico'=>$code,
 				'sCepOrigem'=>'03005020',
 				'sCepDestino'=>$nrzipcode,
 				'nVlPeso'=>$totals['vlweight'],
@@ -243,7 +243,15 @@ class Cart extends Model {
 
 			}
 
-			$desfreight = 'PAC';
+			switch ($code) {
+				case '04014':
+					$desfreight = 'SEDEX';
+					break;
+				
+				case '04510':
+					$desfreight = 'PAC';
+					break;
+			}
 
 			$this->setdesfreight($desfreight);
 			$this->setnrdays($result->PrazoEntrega);
@@ -253,10 +261,6 @@ class Cart extends Model {
 			$this->save();
 
 			return $result;
-
-		} else {
-
-
 
 		}
 
@@ -298,9 +302,17 @@ class Cart extends Model {
 	public function updateFreight()
 	{
 
-		if ($this->getdeszipcode() != '') {
+		if ($this->getdeszipcode() != '' && $this->getdesfreight() != '') {
 
-			$this->setFreight($this->getdeszipcode());
+			if ($this->getdesfreight() == 'SEDEX') {
+				$desfreight = '04014';
+			}
+
+			if ($this->getdesfreight() == 'PAC') {
+				$desfreight = '04510';
+			}
+
+			$this->setFreight($this->getdeszipcode(), $desfreight);
 
 		}
 

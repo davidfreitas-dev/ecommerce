@@ -146,7 +146,7 @@ $app->post("/cart/freight", function(){
 
 	$cart = Cart::getFromSession();
 
-	$cart->setFreight($_POST['zipcode']);
+	$cart->setFreight($_POST['zipcode'], $_POST['code']);
 
 	header("Location: /cart");
 	exit;

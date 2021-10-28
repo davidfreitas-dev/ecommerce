@@ -7,6 +7,10 @@
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 7.4.19
 
+create database db_ecommerce;
+
+use db_ecommerce;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -55,7 +59,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_addresses_save` (`pidaddress` IN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_carts_save` (`pidcart` INT, `pdessessionid` VARCHAR(64), `piduser` INT, `pdeszipcode` CHAR(8), `pvlfreight` DECIMAL(10,2), `pnrdays` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_carts_save` (`pidcart` INT, `pdessessionid` VARCHAR(64), `piduser` INT, `pdeszipcode` CHAR(8), `pvlfreight` DECIMAL(10,2), `pdesfreight` char(8), `pnrdays` INT)  BEGIN
 
     IF pidcart > 0 THEN
         
@@ -65,13 +69,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_carts_save` (`pidcart` INT, `pde
             iduser = piduser,
             deszipcode = pdeszipcode,
             vlfreight = pvlfreight,
+            desfreight = pdesfreight,
             nrdays = pnrdays
         WHERE idcart = pidcart;
         
     ELSE
         
-        INSERT INTO tb_carts (dessessionid, iduser, deszipcode, vlfreight, nrdays)
-        VALUES(pdessessionid, piduser, pdeszipcode, pvlfreight, pnrdays);
+        INSERT INTO tb_carts (dessessionid, iduser, deszipcode, vlfreight, desfreight, nrdays)
+        VALUES(pdessessionid, piduser, pdeszipcode, pvlfreight, pdesfreight, pnrdays);
         
         SET pidcart = LAST_INSERT_ID();
         
@@ -101,7 +106,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_categories_save` (`pidcategory` 
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_orders_save` (`pidorder` INT, `pidcart` INT(11), `piduser` INT(11), `pidstatus` INT(11), `pidaddress` INT(11), `pvltotal` DECIMAL(10,2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_orders_save` (`pidorder` INT, `pidcart` INT(11), `piduser` INT(11), `pidstatus` INT(11), `pidaddress` INT(11), `pidpaymentmethod` INT(11), `pvltotal` DECIMAL(10,2))  BEGIN
 	
 	IF pidorder > 0 THEN
 		
@@ -111,13 +116,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_orders_save` (`pidorder` INT, `p
             iduser = piduser,
             idstatus = pidstatus,
             idaddress = pidaddress,
+            idpaymentmethod = pidpaymentmethod,
             vltotal = pvltotal
 		WHERE idorder = pidorder;
         
     ELSE
     
-		INSERT INTO tb_orders (idcart, iduser, idstatus, idaddress, vltotal)
-        VALUES(pidcart, piduser, pidstatus, pidaddress, pvltotal);
+		INSERT INTO tb_orders (idcart, iduser, idstatus, idaddress, idpaymentmethod, vltotal)
+        VALUES(pidcart, piduser, pidstatus, pidaddress, pidpaymentmethod, pvltotal);
 		
 		SET pidorder = LAST_INSERT_ID();
         
@@ -129,6 +135,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_orders_save` (`pidorder` INT, `p
     INNER JOIN tb_carts c USING(idcart)
     INNER JOIN tb_users d ON d.iduser = a.iduser
     INNER JOIN tb_addresses e USING(idaddress)
+    INNER JOIN tb_paymentmethods f USING(idpaymentmethod)
     WHERE idorder = pidorder;
     
 END$$
@@ -180,7 +187,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_userspasswordsrecoveries_create`
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usersupdate_save` (`piduser` INT, `pdesperson` VARCHAR(64), `pdeslogin` VARCHAR(64), `pdespassword` VARCHAR(256), `pdesemail` VARCHAR(128), `pnrphone` BIGINT, `pinadmin` TINYINT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usersupdate_save` (`piduser` INT, `pdesperson` VARCHAR(64), `pdeslogin` VARCHAR(64), `pdespassword` VARCHAR(256), `pdesemail` VARCHAR(128), `pnrphone` VARCHAR(15), `pnrcpf` VARCHAR(15), `pinadmin` TINYINT)  BEGIN
   
     DECLARE vidperson INT;
     
@@ -192,7 +199,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usersupdate_save` (`piduser` INT
     SET 
     desperson = pdesperson,
         desemail = pdesemail,
-        nrphone = pnrphone
+        nrphone = pnrphone,
+        nrcpf = nrcpf
   WHERE idperson = vidperson;
     
     UPDATE tb_users
@@ -231,12 +239,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_delete` (`piduser` INT)  B
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_save` (`pdesperson` VARCHAR(64), `pdeslogin` VARCHAR(64), `pdespassword` VARCHAR(256), `pdesemail` VARCHAR(128), `pnrphone` BIGINT, `pinadmin` TINYINT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_save` (`pdesperson` VARCHAR(64), `pdeslogin` VARCHAR(64), `pdespassword` VARCHAR(256), `pdesemail` VARCHAR(128), `pnrphone` VARCHAR(15), `pnrcpf` VARCHAR(15), `pinadmin` TINYINT)  BEGIN
   
     DECLARE vidperson INT;
     
-  INSERT INTO tb_persons (desperson, desemail, nrphone)
-    VALUES(pdesperson, pdesemail, pnrphone);
+  INSERT INTO tb_persons (desperson, desemail, nrphone, nrcpf)
+    VALUES(pdesperson, pdesemail, pnrphone, pnrcpf);
     
     SET vidperson = LAST_INSERT_ID();
     
@@ -279,58 +287,10 @@ CREATE TABLE `tb_carts` (
   `iduser` int(11) DEFAULT NULL,
   `deszipcode` char(8) DEFAULT NULL,
   `vlfreight` decimal(10,2) DEFAULT NULL,
+  `desfreight` varchar(10) DEFAULT NULL,
   `nrdays` int(11) DEFAULT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_carts`
---
-
-INSERT INTO `tb_carts` (`idcart`, `dessessionid`, `iduser`, `deszipcode`, `vlfreight`, `nrdays`, `dtregister`) VALUES
-(1, '9frh10okrfs19vqp0rkqup6tto', NULL, NULL, NULL, NULL, '2021-08-11 09:59:30'),
-(2, '60d75tndft25a7d7fefh0gut79', NULL, NULL, NULL, NULL, '2021-08-11 10:05:54'),
-(3, '2ch7mvhfueulglo9vevmv6nmes', NULL, NULL, NULL, NULL, '2021-08-11 10:08:23'),
-(4, '8qvn23trkmc2tfgmd390v9iiep', NULL, NULL, NULL, NULL, '2021-08-11 10:11:36'),
-(5, 'go144c6o4v7npjrmk88bbsse0v', NULL, '02169270', '140.33', 1, '2021-08-11 10:13:50'),
-(6, '5evm76ara0ad78giodlhbmel3q', NULL, NULL, NULL, NULL, '2021-08-11 12:58:21'),
-(7, 'r7ofukkk8pshvr3adpfesb5bbm', 9, '02169270', '140.33', 1, '2021-08-12 10:53:15'),
-(8, 'ka5qdceak0ejp2h1rlrk9b8sm1', 9, NULL, NULL, NULL, '2021-08-12 14:22:05'),
-(9, '24vsc1phtu19vc8rak8uda9270', NULL, '02169270', '50.53', 1, '2021-08-13 10:36:03'),
-(10, '6ffndibv3aqvqptelsrq8hbd8u', 9, '02169270', NULL, NULL, '2021-08-13 10:38:42'),
-(11, 'elss5q38884qc09asqr64hmlhh', 9, '02169270', '302.33', 1, '2021-08-13 10:39:21'),
-(12, 'gdfmfsshekg4iipjuqf44pqvps', 9, '02169270', '50.57', 1, '2021-08-13 10:53:24'),
-(13, '9c3l90074miem6mremp70k345b', 9, '02169270', '68.21', 1, '2021-08-13 10:55:22'),
-(14, 'hn7qojnjiofsnrg4940bnkq3it', 9, '02169270', '79.53', 1, '2021-08-13 11:17:03'),
-(15, '1bm86a0gq5p12qfd28bp502of9', 9, '02169270', '79.53', 1, '2021-08-13 12:16:21'),
-(16, '80op15ebg4oh8dkeevvare4v2o', 9, '02169270', '56.23', 1, '2021-08-13 12:56:42'),
-(17, '6fk0h564jkbc0ccagmamci0sm0', 9, NULL, NULL, NULL, '2021-08-13 13:03:27'),
-(18, 'l8di89ek3hrs61hsvo67qtguu0', 9, NULL, NULL, NULL, '2021-08-13 13:12:17'),
-(19, 'shq661l8bqthviqcurdhlunk6v', 9, '02169270', NULL, NULL, '2021-08-13 13:22:35'),
-(20, 'u7h22sru00hr35qmc1lib1gujl', NULL, '02169270', '50.57', 1, '2021-08-13 14:04:36'),
-(21, 'sopj100inimod1kbtsc5pccv1q', 9, '02169270', '111.41', 1, '2021-08-13 14:48:45'),
-(22, 'ghd6tk5s7s827t0p3v1io4lkib', 9, NULL, NULL, NULL, '2021-08-13 15:47:22'),
-(23, 'vph1ervm038f5lreqerdc0o68o', NULL, NULL, NULL, NULL, '2021-08-16 19:35:43'),
-(24, '57pm4uqt5en6k63eekdmrut46k', NULL, '02169270', '50.53', 1, '2021-08-17 11:57:24'),
-(25, 'njgdom3utfi47ekn1nr5j1uufe', 9, '02169270', '56.23', 1, '2021-08-17 12:01:54'),
-(26, 'alhv57gd1o7ita2am8qrkbr6ro', 9, NULL, NULL, NULL, '2021-08-17 12:21:35'),
-(27, 'tvdh2skcs34fatmsm7192c4u0j', NULL, '', '0.00', 0, '2021-08-17 12:28:16'),
-(28, 'd5iai2t3mk8fur357lkprbipf0', NULL, NULL, NULL, NULL, '2021-08-17 19:44:38'),
-(29, 'spgu0jo166emcn40656klhnb84', NULL, NULL, NULL, NULL, '2021-08-18 10:25:23'),
-(30, 'cj25848hmk6o3pp1oggh1jtdct', NULL, '02169270', '50.57', 1, '2021-08-18 10:35:29'),
-(31, 'oesmhea8diuku615mu50fdkc3g', 9, '02169270', '56.23', 1, '2021-08-18 11:32:37'),
-(32, '708b4cnn4dc7t40ta990cibn8m', 9, '02169270', '86.93', 1, '2021-08-18 16:14:37'),
-(33, 'e19thpkf60l9fi13v0kh7qodtc', 9, '02169270', '86.93', 1, '2021-08-18 16:28:32'),
-(34, 'dn19hlqef5kuirb404k4hmrkp7', NULL, NULL, NULL, NULL, '2021-08-19 11:14:41'),
-(35, 'oqu5rvvgqp8cvo31qesf1j0d44', NULL, '02169270', '52.23', 1, '2021-08-20 11:04:40'),
-(36, 'd7jb890ukqg0qvnlhvcbbpkt6d', 9, '02169270', '52.23', 1, '2021-08-20 13:32:57'),
-(37, '5d3k2eqo8ii6rphfasgrh0odcu', 9, '02169270', '52.69', 1, '2021-08-20 13:57:24'),
-(38, 'sj8khtqd5emscu8bffq13hk8ua', 9, '02169270', '46.23', 1, '2021-08-20 14:01:54'),
-(39, 'h70kkt55u4vat2f0hnblsh4i6l', 9, '02169270', '52.23', 1, '2021-08-20 14:59:14'),
-(40, 'noiff3s015gbd0phujg8mhvhsf', 9, '02169270', '106.40', 1, '2021-08-20 15:13:07'),
-(41, '1f0cm9489nhn99tier6i27belu', 9, '02169270', '24.20', 7, '2021-08-20 15:19:48'),
-(42, 'c4gjcngpqv8jrmlmue45l21p9c', 9, '02169270', '21.00', 7, '2021-08-20 15:28:41'),
-(43, '1kdbqdalrt74jmfahsismendbm', 9, '02169270', NULL, NULL, '2021-08-20 15:29:45');
 
 -- --------------------------------------------------------
 
@@ -345,72 +305,6 @@ CREATE TABLE `tb_cartsproducts` (
   `dtremoved` datetime NOT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_cartsproducts`
---
-
-INSERT INTO `tb_cartsproducts` (`idcartproduct`, `idcart`, `idproduct`, `dtremoved`, `dtregister`) VALUES
-(8, 5, 1, '2021-08-11 07:16:33', '2021-08-11 10:13:50'),
-(9, 5, 2, '2021-08-11 07:16:36', '2021-08-11 10:14:05'),
-(10, 5, 2, '2021-08-11 07:16:36', '2021-08-11 10:15:29'),
-(11, 5, 2, '2021-08-11 07:16:36', '2021-08-11 10:15:37'),
-(12, 5, 2, '2021-08-11 07:16:36', '2021-08-11 10:15:45'),
-(14, 5, 1, '2021-08-11 07:20:34', '2021-08-11 10:17:19'),
-(15, 5, 1, '2021-08-11 07:20:34', '2021-08-11 10:17:19'),
-(16, 5, 1, '2021-08-11 07:20:34', '2021-08-11 10:17:23'),
-(17, 5, 1, '2021-08-11 07:20:34', '2021-08-11 10:17:31'),
-(18, 5, 1, '2021-08-11 07:20:34', '2021-08-11 10:19:41'),
-(27, 5, 2, '2021-08-11 09:47:17', '2021-08-11 12:46:17'),
-(28, 5, 2, '2021-08-11 09:47:17', '2021-08-11 12:46:47'),
-(29, 5, 2, '2021-08-11 09:47:17', '2021-08-11 12:47:01'),
-(30, 5, 1, '2021-08-11 09:48:13', '2021-08-11 12:48:03'),
-(31, 5, 1, '2021-08-11 09:48:57', '2021-08-11 12:48:04'),
-(35, 5, 1, '2021-08-11 09:55:05', '2021-08-11 12:54:55'),
-(36, 5, 1, '2021-08-11 09:55:09', '2021-08-11 12:55:01'),
-(39, 5, 1, '2021-08-11 14:36:46', '2021-08-11 15:15:00'),
-(40, 5, 1, '2021-08-11 14:37:42', '2021-08-11 17:37:07'),
-(41, 5, 1, '0000-00-00 00:00:00', '2021-08-11 17:49:56'),
-(42, 5, 1, '0000-00-00 00:00:00', '2021-08-11 17:49:57'),
-(43, 7, 1, '2021-08-12 12:22:56', '2021-08-12 15:21:48'),
-(44, 7, 2, '2021-08-12 12:22:55', '2021-08-12 15:21:58'),
-(45, 7, 2, '2021-08-12 12:22:55', '2021-08-12 15:21:58'),
-(47, 7, 1, '0000-00-00 00:00:00', '2021-08-12 15:23:47'),
-(48, 7, 1, '0000-00-00 00:00:00', '2021-08-12 15:24:01'),
-(59, 14, 2, '0000-00-00 00:00:00', '2021-08-13 12:14:30'),
-(60, 14, 2, '0000-00-00 00:00:00', '2021-08-13 12:14:30'),
-(61, 15, 2, '0000-00-00 00:00:00', '2021-08-13 12:16:21'),
-(62, 15, 2, '0000-00-00 00:00:00', '2021-08-13 12:16:21'),
-(63, 16, 2, '0000-00-00 00:00:00', '2021-08-13 13:21:23'),
-(64, 20, 1, '2021-08-13 11:04:57', '2021-08-13 14:04:45'),
-(65, 20, 1, '2021-08-13 11:05:00', '2021-08-13 14:04:51'),
-(67, 21, 2, '0000-00-00 00:00:00', '2021-08-13 15:46:32'),
-(70, 21, 1, '2021-08-13 12:47:00', '2021-08-13 15:46:48'),
-(71, 21, 1, '2021-08-13 12:47:00', '2021-08-13 15:46:48'),
-(72, 21, 1, '2021-08-13 12:47:00', '2021-08-13 15:46:49'),
-(74, 25, 2, '0000-00-00 00:00:00', '2021-08-17 12:21:09'),
-(81, 27, 2, '2021-08-17 13:27:37', '2021-08-17 16:24:07'),
-(82, 27, 2, '2021-08-17 13:27:37', '2021-08-17 16:24:57'),
-(83, 27, 2, '2021-08-17 13:27:37', '2021-08-17 16:25:52'),
-(84, 27, 2, '2021-08-17 13:27:37', '2021-08-17 16:26:37'),
-(87, 27, 2, '0000-00-00 00:00:00', '2021-08-17 16:33:51'),
-(89, 31, 2, '0000-00-00 00:00:00', '2021-08-18 16:07:08'),
-(90, 32, 1, '0000-00-00 00:00:00', '2021-08-18 16:14:42'),
-(91, 33, 1, '0000-00-00 00:00:00', '2021-08-18 16:28:35'),
-(92, 35, 15, '0000-00-00 00:00:00', '2021-08-20 13:27:43'),
-(93, 36, 15, '0000-00-00 00:00:00', '2021-08-20 13:55:25'),
-(94, 37, 18, '2021-08-20 10:59:55', '2021-08-20 13:59:19'),
-(95, 37, 16, '2021-08-20 11:00:11', '2021-08-20 13:59:38'),
-(96, 37, 16, '0000-00-00 00:00:00', '2021-08-20 14:00:19'),
-(97, 37, 14, '0000-00-00 00:00:00', '2021-08-20 14:00:33'),
-(98, 38, 16, '0000-00-00 00:00:00', '2021-08-20 14:46:00'),
-(99, 39, 15, '0000-00-00 00:00:00', '2021-08-20 15:12:31'),
-(100, 40, 14, '0000-00-00 00:00:00', '2021-08-20 15:13:14'),
-(101, 40, 14, '0000-00-00 00:00:00', '2021-08-20 15:13:16'),
-(102, 40, 14, '0000-00-00 00:00:00', '2021-08-20 15:13:18'),
-(103, 41, 1, '0000-00-00 00:00:00', '2021-08-20 15:22:30'),
-(104, 41, 1, '0000-00-00 00:00:00', '2021-08-20 15:26:17'),
-(105, 42, 16, '0000-00-00 00:00:00', '2021-08-20 15:28:54');
 
 -- --------------------------------------------------------
 
@@ -429,22 +323,11 @@ CREATE TABLE `tb_categories` (
 --
 
 INSERT INTO `tb_categories` (`idcategory`, `descategory`, `dtregister`) VALUES
-(4, 'Gamer', '2021-08-06 15:49:33'),
-(6, 'Processors', '2021-08-06 15:51:32'),
-(7, 'Storage', '2021-08-06 15:51:41'),
-(8, 'PC Gamer', '2021-08-06 15:51:53'),
-(9, 'Peripherals', '2021-08-09 11:23:35');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `tb_categoriesproducts`
---
-
-CREATE TABLE `tb_categoriesproducts` (
-  `idcategory` int(11) NOT NULL,
-  `idproduct` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 'Gamer', '2021-08-06 15:49:33'),
+(2, 'Processors', '2021-08-06 15:51:32'),
+(3, 'Storage', '2021-08-06 15:51:41'),
+(4, 'PC Gamer', '2021-08-06 15:51:53'),
+(5, 'Peripherals', '2021-08-09 11:23:35');
 
 -- --------------------------------------------------------
 
@@ -458,25 +341,10 @@ CREATE TABLE `tb_orders` (
   `iduser` int(11) NOT NULL,
   `idstatus` int(11) NOT NULL,
   `idaddress` int(11) NOT NULL,
+  `idpaymentmethod` int(11) NOT NULL,
   `vltotal` decimal(10,2) NOT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_orders`
---
-
-INSERT INTO `tb_orders` (`idorder`, `idcart`, `iduser`, `idstatus`, `idaddress`, `vltotal`, `dtregister`) VALUES
-(4, 32, 9, 1, 16, '2636.83', '2021-08-18 16:14:54'),
-(5, 33, 9, 1, 17, '2636.83', '2021-08-18 16:28:47'),
-(6, 35, 9, 1, 18, '942.13', '2021-08-20 13:27:58'),
-(7, 36, 9, 1, 19, '942.13', '2021-08-20 13:55:43'),
-(8, 37, 9, 1, 20, '890.49', '2021-08-20 14:01:41'),
-(9, 38, 9, 1, 21, '636.13', '2021-08-20 14:59:01'),
-(10, 39, 9, 1, 22, '942.13', '2021-08-20 15:12:49'),
-(11, 40, 9, 1, 23, '850.10', '2021-08-20 15:13:29'),
-(12, 41, 9, 1, 24, '3124.00', '2021-08-20 15:26:29'),
-(13, 42, 9, 1, 25, '610.90', '2021-08-20 15:29:04');
 
 -- --------------------------------------------------------
 
@@ -495,10 +363,32 @@ CREATE TABLE `tb_ordersstatus` (
 --
 
 INSERT INTO `tb_ordersstatus` (`idstatus`, `desstatus`, `dtregister`) VALUES
-(1, 'Em Aberto', '2017-03-13 06:00:00'),
-(2, 'Aguardando Pagamento', '2017-03-13 06:00:00'),
-(3, 'Pago', '2017-03-13 06:00:00'),
-(4, 'Entregue', '2017-03-13 06:00:00');
+(1, 'Aguardando Pagamento', '2017-03-13 06:00:00'),
+(2, 'Pago', '2017-03-13 06:00:00'),
+(3, 'Cancelado', '2017-03-13 06:00:00'),
+(4, 'Em Separação', '2017-03-13 06:00:00'),
+(5, 'Enviado', '2017-03-13 06:00:00'),
+(6, 'Entregue', '2017-03-13 06:00:00');
+
+--
+-- Estrutura da tabela `tb_paymentmethod`
+--
+
+CREATE TABLE `tb_paymentmethods` (
+  `idpaymentmethod` int(11) NOT NULL,
+  `desmethod` varchar(32) NOT NULL,
+  `dtregister` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_paymentmethod`
+--
+
+INSERT INTO `tb_paymentmethods` (`idpaymentmethod`, `desmethod`, `dtregister`) VALUES
+(1, 'Pagseguro', '2021-08-11 17:32:22'),
+(2, 'Paypal', '2021-08-11 17:32:22'),
+(3, 'Pix', '2021-08-11 17:32:22'),
+(4, 'Boleto', '2021-08-11 17:32:22');
 
 -- --------------------------------------------------------
 
@@ -510,7 +400,8 @@ CREATE TABLE `tb_persons` (
   `idperson` int(11) NOT NULL,
   `desperson` varchar(64) NOT NULL,
   `desemail` varchar(128) DEFAULT NULL,
-  `nrphone` bigint(20) DEFAULT NULL,
+  `nrphone` varchar(15) DEFAULT NULL,
+  `nrcpf` varchar(15) DEFAULT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -519,7 +410,7 @@ CREATE TABLE `tb_persons` (
 --
 
 INSERT INTO `tb_persons` (`idperson`, `desperson`, `desemail`, `nrphone`, `dtregister`) VALUES
-(9, 'Admin', 'davidfrei7as@gmail.com', 11930389760, '2021-08-11 17:32:22');
+(1, 'Admin', 'davidfreitas.dev@outlook.com', 11999999999, '2021-08-11 17:32:22');
 
 -- --------------------------------------------------------
 
@@ -549,13 +440,13 @@ CREATE TABLE `tb_products` (
 INSERT INTO `tb_products` (`idproduct`, `desproduct`, `desdescription`, `vlprice`, `vlwidth`, `vlheight`, `vllength`, `vlweight`, `inventory`, `instock`, `desurl`, `dtregister`) VALUES
 (1, 'Processador AMD Ryzen 7 3800X', 'Teste Inativo', '1549.90', '15.00', '15.00', '15.00', '0.81', 25, 0, 'smartphone-android-7.0', '2017-03-13 06:00:00'),
 (2, 'Processador Intel Core i5-10400F', 'Processador de ultima geração intel', '1089.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'smarttv-led-4k', '2017-03-13 06:00:00'),
-(12, 'PC Gamer Concórdia Intel Core i3-9100F, RX 550, 8GB DDR4, HD 1TB', 'PC gamer parrudão', '2790.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'pc-gamer', '2017-03-13 06:00:00'),
-(13, 'SSD Kross Elegance 120GB, NVME, M.2, Leitura 550MB/s e Gravação ', 'SSD Super rápido', '150.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'SSD-nvme-m2', '2017-03-13 06:00:00'),
-(14, 'Mouse Gamer Husky Blizzard, Rainbow', 'Kit gamer com vários RGB', '247.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'kit-mouse-teclado-gamer', '2017-03-13 06:00:00'),
-(15, 'Monitor Gamer Samsung LED 24´ Widescreen, Full HD', 'Monitor gamer irado', '889.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'Monitor-Gamer-Samsung', '2017-03-13 06:00:00'),
-(16, 'Cadeira Gamer Tempest Husky Gaming Black 500', 'Cadeira Gamer super confortavel', '589.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'cadeira-gamer-confortavel', '2017-03-13 06:00:00'),
-(17, 'Roteador Wireless D-Link MU-MIMO Gigabit AC1200, 1200Mbps, 6 Ant', 'Roteador wireless 6 antenas', '289.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'roteador-wireless-d-link', '2017-03-13 06:00:00'),
-(18, 'Memória Kingston Fury Beast, 8GB, 2666MHz, DDR4', 'Memoria zica', '12.00', '1.10', '1.10', '1.10', '1.10', 35, 1, 'memoria-kingston-fury-beast', '2021-08-19 13:46:27');
+(3, 'PC Gamer Concórdia Intel Core i3-9100F, RX 550, 8GB DDR4, HD 1TB', 'PC gamer parrudão', '2790.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'pc-gamer', '2017-03-13 06:00:00'),
+(4, 'SSD Kross Elegance 120GB, NVME, M.2, Leitura 550MB/s e Gravação ', 'SSD Super rápido', '150.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'SSD-nvme-m2', '2017-03-13 06:00:00'),
+(5, 'Mouse Gamer Husky Blizzard, Rainbow', 'Kit gamer com vários RGB', '247.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'kit-mouse-teclado-gamer', '2017-03-13 06:00:00'),
+(6, 'Monitor Gamer Samsung LED 24´ Widescreen, Full HD', 'Monitor gamer irado', '889.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'Monitor-Gamer-Samsung', '2017-03-13 06:00:00'),
+(7, 'Cadeira Gamer Tempest Husky Gaming Black 500', 'Cadeira Gamer super confortavel', '589.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'cadeira-gamer-confortavel', '2017-03-13 06:00:00'),
+(8, 'Roteador Wireless D-Link MU-MIMO Gigabit AC1200, 1200Mbps, 6 Ant', 'Roteador wireless 6 antenas', '289.90', '15.00', '15.00', '15.00', '0.27', 100, 1, 'roteador-wireless-d-link', '2017-03-13 06:00:00'),
+(9, 'Memória Kingston Fury Beast, 8GB, 2666MHz, DDR4', 'Memoria zica', '12.00', '1.10', '1.10', '1.10', '1.10', 35, 1, 'memoria-kingston-fury-beast', '2021-08-19 13:46:27');
 
 -- --------------------------------------------------------
 
@@ -567,23 +458,6 @@ CREATE TABLE `tb_productscategories` (
   `idcategory` int(11) NOT NULL,
   `idproduct` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_productscategories`
---
-
-INSERT INTO `tb_productscategories` (`idcategory`, `idproduct`) VALUES
-(4, 12),
-(4, 14),
-(4, 15),
-(4, 16),
-(6, 1),
-(6, 2),
-(7, 13),
-(8, 12),
-(9, 14),
-(9, 16),
-(9, 17);
 
 -- --------------------------------------------------------
 
@@ -605,7 +479,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`iduser`, `idperson`, `deslogin`, `despassword`, `inadmin`, `dtregister`) VALUES
-(9, 9, 'admin', '$2y$12$JnKyMY0NGAQwv/paZF0XVOcpTgc72s6MVVhBiYl1cm2SkBxtzzZo6', 1, '2021-08-11 17:32:22');
+(1, 1, 'admin', '$2y$12$JnKyMY0NGAQwv/paZF0XVOcpTgc72s6MVVhBiYl1cm2SkBxtzzZo6', 1, '2021-08-11 17:32:22');
 
 -- --------------------------------------------------------
 
@@ -637,18 +511,6 @@ CREATE TABLE `tb_userspasswordsrecoveries` (
   `dtrecovery` datetime DEFAULT NULL,
   `dtregister` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `tb_userspasswordsrecoveries`
---
-
-INSERT INTO `tb_userspasswordsrecoveries` (`idrecovery`, `iduser`, `desip`, `dtrecovery`, `dtregister`) VALUES
-(41, 9, '127.0.0.1', '2021-08-12 08:08:24', '2021-08-12 11:08:06'),
-(42, 9, '127.0.0.1', '2021-08-12 08:10:16', '2021-08-12 11:09:48'),
-(43, 9, '127.0.0.1', '2021-08-12 10:35:26', '2021-08-12 13:34:57'),
-(44, 9, '127.0.0.1', '2021-08-12 10:38:17', '2021-08-12 13:38:05'),
-(50, 9, '127.0.0.1', '2021-08-12 11:21:59', '2021-08-12 14:21:39'),
-(51, 9, '127.0.0.1', '2021-08-17 08:58:33', '2021-08-17 11:58:02');
 
 --
 -- Índices para tabelas despejadas
@@ -683,12 +545,6 @@ ALTER TABLE `tb_categories`
   ADD PRIMARY KEY (`idcategory`);
 
 --
--- Índices para tabela `tb_categoriesproducts`
---
-ALTER TABLE `tb_categoriesproducts`
-  ADD PRIMARY KEY (`idcategory`,`idproduct`);
-
---
 -- Índices para tabela `tb_orders`
 --
 ALTER TABLE `tb_orders`
@@ -696,7 +552,8 @@ ALTER TABLE `tb_orders`
   ADD KEY `FK_orders_users_idx` (`iduser`),
   ADD KEY `fk_orders_ordersstatus_idx` (`idstatus`),
   ADD KEY `fk_orders_carts_idx` (`idcart`),
-  ADD KEY `fk_orders_addresses_idx` (`idaddress`);
+  ADD KEY `fk_orders_addresses_idx` (`idaddress`),
+  ADD KEY `fk_orders_paymentmethods_idx` (`idpaymentmethod`);
 
 --
 -- Índices para tabela `tb_ordersstatus`

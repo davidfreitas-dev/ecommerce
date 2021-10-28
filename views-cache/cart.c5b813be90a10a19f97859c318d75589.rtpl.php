@@ -94,11 +94,17 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="input-group">
-                            <input type="text" class="form-control" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" placeholder="Digite o CEP" name="zipcode">
-                            <div class="input-group-append">
-                              <input class="input-group-text" type="submit" formmethod="POST" formaction="/cart/freight" value="Calcular"/>
-                            </div>
-                          </div>
+                              <input class="input-group-text d-none" type="submit" id="calcular" formmethod="POST" formaction="/cart/freight" />                              
+                              <input type="text" class="form-control single-input" value="<?php echo htmlspecialchars( $cart["deszipcode"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" placeholder="CEP" name="zipcode">                              
+                              <!--<input type="hidden" value="" name="freightcode">-->
+                              <div class="input-group-append">                                
+                                <select type="text" name="code" id="code">
+                                  <option>Selecione</option>
+                                  <option value="04014">Sedex</option>
+                                  <option value="04510">PAC</option>
+                                </select>
+                              </div>
+                          </div>                          
                         </div>                      
                       </div>
                     </td>
