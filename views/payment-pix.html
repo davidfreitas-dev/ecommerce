@@ -1,0 +1,11 @@
+// Alterar o action do form para enviar as informações para a classe Payload
+<form id="form-payload" method="post">
+
+    // Parâmetros a serem enviados
+    <input type="hidden" name="description" value="Pagamento do Pedido {$order.idorder}">    
+    <input type="hidden" name="amount" value="{$order.vltotal}">
+
+</form>
+<script>
+document.forms[0].submit();
+</script>

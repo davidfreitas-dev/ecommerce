@@ -281,7 +281,7 @@ $app->post("/checkout", function(){
 		break;
 
 		case 3:
-		// Método de pagamento PIX
+		header("Location: /order/".$order->getidorder()."/pix");
 		break;
 
 		case 4:
@@ -343,6 +343,30 @@ $app->get("/order/:idorder/paypal", function($idorder){
 	]);
 
 	$page->setTpl("payment-paypal", [
+		'order'=>$order->getValues(),
+		'cart'=>$cart->getValues(),
+		'products'=>$cart->getProducts()
+	]);
+
+
+});
+
+$app->get("/order/:idorder/pix", function($idorder){
+
+	User::verifyLogin(false);
+
+	$order = new Order();
+
+	$order->get((int)$idorder);
+
+	$cart = $order->getCart();
+
+	$page = new Page([
+		'header'=>false,
+		'footer'=>false
+	]);
+
+	$page->setTpl("payment-pix", [
 		'order'=>$order->getValues(),
 		'cart'=>$cart->getValues(),
 		'products'=>$cart->getProducts()

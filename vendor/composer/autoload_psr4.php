@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Store\\' => array($vendorDir . '/store/php-classes/src'),
+    'Mpdf\\QrCode\\' => array($vendorDir . '/mpdf/qrcode/src'),
 );

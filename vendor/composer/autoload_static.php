@@ -11,12 +11,20 @@ class ComposerStaticInit088ae6983dc71da77586cbda6fc9e0a3
         array (
             'Store\\' => 6,
         ),
+        'M' => 
+        array (
+            'Mpdf\\QrCode\\' => 12,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Store\\' => 
         array (
             0 => __DIR__ . '/..' . '/store/php-classes/src',
+        ),
+        'Mpdf\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/qrcode/src',
         ),
     );
 
