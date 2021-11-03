@@ -2,6 +2,9 @@
 
 namespace Store;
 
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output;
+
 class Payload {
 
     /**
@@ -210,6 +213,29 @@ class Payload {
 
         //RETORNA CÓDIGO CRC16 DE 4 CARACTERES
         return self::ID_CRC16.'04'.strtoupper(dechex($resultado));
+    }
+
+    public function get($description, $amout)
+    {
+
+        $obPayload = (new Payload)->setPixKey('davidfrei7as@outlkook.com')
+                                  ->setDescription($description)
+                                  ->setMerchantName('Virtual Store')
+                                  ->setMerchantCity('SAO PAULO')
+                                  ->setAmount($amout)
+                                  ->setTxid('VIRTUALSTORE2021');
+
+        $payloadQrCode = $obPayload->getPayload();
+
+        $obQrCode = new QrCode($payloadQrCode);
+
+        $imgQrCode = (new Output\Png)->output($obQrCode, 400);
+
+        $imgQrCode = base64_encode($imgQrCode);
+
+        var_dump($imgQrCode);
+        exit;
+
     }
 
 }

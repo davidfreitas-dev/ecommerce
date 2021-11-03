@@ -8,6 +8,7 @@ use \Store\Model\Address;
 use \Store\Model\User;
 use \Store\Model\Order;
 use \Store\Model\OrderStatus;
+use \Store\Payload;
 
 $app->get('/', function() {
 
@@ -359,19 +360,30 @@ $app->get("/order/:idorder/pix", function($idorder){
 
 	$order->get((int)$idorder);
 
-	$cart = $order->getCart();
-
 	$page = new Page([
 		'header'=>false,
 		'footer'=>false
 	]);
 
 	$page->setTpl("payment-pix", [
-		'order'=>$order->getValues(),
-		'cart'=>$cart->getValues(),
-		'products'=>$cart->getProducts()
+		'order'=>$order->getValues()
 	]);
 
+});
+
+$app->post("/pix", function(){
+
+	User::verifyLogin(false);
+
+	$payload = new Payload;
+
+	$payload->get($_POST['description'], $_POST['amount']);
+	
+});
+
+$app->get("/pix", function(){
+
+	User::verifyLogin(false);
 
 });
 

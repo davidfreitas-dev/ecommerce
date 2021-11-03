@@ -17,5 +17,21 @@ $obPayload = (new Payload)->setPixKey('davidfrei7as@outlkook.com')
 // Código de pagamento Pix
 $payloadQrCode = $obPayload->getPayload();
 
-// QrCode
+// Instância QrCode
 $obQrCode = new QrCode($payloadQrCode);
+
+// Imagem do QrCode
+$imgQrCode = (new Output\Png)->output($obQrCode, 400);
+
+ ?>
+
+<h1>QR CODE PIX</h1>
+
+<br>
+
+<img src="data:image/png;base64, <?=base64_encode($imgQrCode)?>" alt="">
+
+<br><br>
+
+Código Pix: <br>
+<strong><?=$payloadQrCode?></strong>

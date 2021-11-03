@@ -118,17 +118,24 @@
                     </a>
                   </li>
                 </ul>
-                <div class="payment_item">
+                <div class="payment_item active">
                   <div class="radion_btn">
                     <input type="radio" checked="checked" id="method-pagseguro" name="payment-method" value="1" />
                     <label class="" for="method-pagseguro"><img src="/res/site/img/logo-pagseguro.png" width="130" height="30"></label>
                     <div class="check"></div>
                   </div>
                 </div>
-                <div class="payment_item active">
+                <div class="payment_item">
                   <div class="radion_btn">
                     <input type="radio" id="method-paypal" name="payment-method"  value="2" />
                     <label class="" for="method-paypal"><img src="/res/site/img/logo-paypal.png" width="120" height="30"></label>
+                    <div class="check"></div>
+                  </div>
+                </div>
+                <div class="payment_item">
+                  <div class="radion_btn">
+                    <input type="radio" id="method-pix" name="payment-method" value="3" />
+                    <label class="" for="method-pix"><img src="/res/site/img/logo-pagseguro.png" width="130" height="30"></label>
                     <div class="check"></div>
                   </div>
                   <p class="mt-5">
