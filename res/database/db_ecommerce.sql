@@ -479,7 +479,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`iduser`, `idperson`, `deslogin`, `despassword`, `inadmin`, `dtregister`) VALUES
-(1, 1, 'admin', '$2y$12$JnKyMY0NGAQwv/paZF0XVOcpTgc72s6MVVhBiYl1cm2SkBxtzzZo6', 1, '2021-08-11 17:32:22');
+(1, 1, 'admin', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga', 1, '2021-08-11 17:32:22');
 
 -- --------------------------------------------------------
 
