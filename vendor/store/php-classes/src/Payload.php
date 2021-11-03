@@ -2,6 +2,9 @@
 
 namespace Store;
 
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output;
+
 class Payload {
 
     /**
@@ -221,6 +224,20 @@ class Payload {
                                   ->setMerchantCity('SAO PAULO')
                                   ->setAmount($amout)
                                   ->setTxid('VIRTUALSTORE2021');
+
+        $payloadQrCode = $obPayload->getPayload();
+
+        $obQrCode = new QrCode($payloadQrCode);
+
+        $imgQrCode = (new Output\Png)->output($obQrCode, 400);
+
+        $imgQrCode = base64_encode($imgQrCode);
+
+        echo "<img src='data:image/png;base64, ".$imgQrCode."' alt=''><br>";
+
+        echo "<h3>Código Pix:</h3>";
+
+        echo "<strong>".$payloadQrCode."</strong>";
 
     }
 

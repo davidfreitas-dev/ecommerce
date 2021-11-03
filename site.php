@@ -10,9 +10,6 @@ use \Store\Model\Order;
 use \Store\Model\OrderStatus;
 use \Store\Payload;
 
-use Mpdf\QrCode\QrCode;
-use Mpdf\QrCode\Output;
-
 $app->get('/', function() {
 
 	$products = Product::limitedListProducts();
@@ -381,31 +378,12 @@ $app->post("/pix", function(){
 	$payload = new Payload;
 
 	$payload->get($_POST['description'], $_POST['amount']);
-
-	header('Location: /pix');
-	exit;
 	
 });
 
 $app->get("/pix", function(){
 
 	User::verifyLogin(false);
-
-	$payload = new Payload;
-
-	$payloadQrCode = $payload->getPayload();
-
-	$obQrCode = new QrCode($payloadQrCode);
-
-	$imgQrCode = (new Output\Png)->output($obQrCode, 400);
-
-	$imgQrCode = base64_encode($imgQrCode);
-
-	echo "<img src='data:image/png;base64, ".$imgQrCode."' alt=''><br>";
-
-	echo "<h3>Código Pix:</h3>";
-
-	echo "<strong>".$payloadQrCode."</strong>";
 
 });
 
