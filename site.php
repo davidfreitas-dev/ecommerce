@@ -10,6 +10,9 @@ use \Store\Model\Order;
 use \Store\Model\OrderStatus;
 use \Store\Payload;
 
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output;
+
 $app->get('/', function() {
 
 	$products = Product::limitedListProducts();
@@ -375,15 +378,24 @@ $app->post("/pix", function(){
 
 	User::verifyLogin(false);
 
-	$payload = new Payload;
+	$obPayload = (new Payload)->setPixKey('davidfrei7as@outlook.com')
+                              ->setDescription($_POST['description'])
+                              ->setMerchantName('Virtual Store')
+                              ->setMerchantCity('SAO PAULO')
+                              ->setAmount($_POST['amount'])
+                              ->setTxid('VIRTUALSTORE2021');
 
-	$payload->get($_POST['description'], $_POST['amount']);
-	
-});
+	$payloadQrCode = $obPayload->getPayload();
 
-$app->get("/pix", function(){
+	$obQrCode = new QrCode($payloadQrCode);
 
-	User::verifyLogin(false);
+	$imgQrCode = (new Output\Png)->output($obQrCode, 250);
+
+	$page = new Page();
+
+	$page->setTpl("payment", [
+		'qrcode'=>$imgQrCode = base64_encode($imgQrCode)
+	]);
 
 });
 

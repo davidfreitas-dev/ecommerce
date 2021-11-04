@@ -135,7 +135,7 @@
                 <div class="payment_item">
                   <div class="radion_btn">
                     <input type="radio" id="method-pix" name="payment-method" value="3" />
-                    <label class="" for="method-pix"><img src="/res/site/img/logo-pagseguro.png" width="130" height="30"></label>
+                    <label class="" for="method-pix"><img src="/res/site/img/logo-pix.png" width="90" height="30"></label>
                     <div class="check"></div>
                   </div>
                   <p class="mt-5">

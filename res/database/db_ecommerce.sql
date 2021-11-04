@@ -410,7 +410,8 @@ CREATE TABLE `tb_persons` (
 --
 
 INSERT INTO `tb_persons` (`idperson`, `desperson`, `desemail`, `nrphone`, `dtregister`) VALUES
-(1, 'Admin', 'davidfreitas.dev@outlook.com', 11999999999, '2021-08-11 17:32:22');
+(1, 'Admin', 'davidfreitas.dev@outlook.com', 11999999999, '2021-08-11 17:32:22'),
+(2, 'Usuário Teste', 'davidfrei7as@outlook.com', 11999999999, '2021-08-11 17:32:22');
 
 -- --------------------------------------------------------
 
@@ -479,7 +480,8 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`iduser`, `idperson`, `deslogin`, `despassword`, `inadmin`, `dtregister`) VALUES
-(1, 1, 'admin', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga', 1, '2021-08-11 17:32:22');
+(1, 1, 'admin', '$2y$12$YlooCyNvyTji8bPRcrfNfOKnVMmZA9ViM2A3IpFjmrpIbp5ovNmga', 1, '2021-08-11 17:32:22'),
+(2, 2, 'davidfrei7as@outlook.com', '$2y$12$Hl0YFyxxuJ8c/TPpoShRZ.0r3PTP24mL7Q3iTBvC70Reou1dp4ZS6', 0, '2021-08-11 17:32:22');
 
 -- --------------------------------------------------------
 
