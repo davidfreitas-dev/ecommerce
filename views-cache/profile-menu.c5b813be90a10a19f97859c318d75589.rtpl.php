@@ -1,7 +1,0 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="list-group-flush mb-5">
-    <a href="#" class="list-group-item active"><i class="ti-menu mr-2"></i>MENU</a>
-    <a href="/profile/orders" class="list-group-item"><i class="ti-package mr-2"></i>Orders</a>
-    <a href="/profile" class="list-group-item"><i class="ti-user mr-2"></i>Account</a>
-    <a href="/profile/change-password" class="list-group-item"><i class="ti-key mr-2"></i>Password</a>
-    <a href="/logout" class="list-group-item"><i class="ti-power-off mr-2"></i>Logout</a>
-</div>

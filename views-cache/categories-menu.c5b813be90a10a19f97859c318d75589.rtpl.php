@@ -1,1 +1,0 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><li class="nav-item"><a class="nav-link" href="/categories/11">Gamer</a></li><li class="nav-item"><a class="nav-link" href="/categories/10">Periféricos</a></li>
